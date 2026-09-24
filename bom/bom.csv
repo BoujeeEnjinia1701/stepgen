@@ -1,0 +1,8 @@
+item,qty,spec,supplier,unit_cost_usd,make_buy,notes
+Steel base and rocker-linked pedals,,,,,,
+Chain or rack drive with one-way clutches (2),,,,,,
+Flywheel,,,,,,
+"BLDC motor used as generator, geared up",,,,,,
+Rectifier and load controller (sets step resistance),,,,,,
+"Display for steps, watts and watt-hours",,,,,,
+Output lead to PowerBox,,,,,,
