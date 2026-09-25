@@ -3,7 +3,7 @@ doc_id: SGN-PRB-001
 title: StepGen problem statement
 project: StepGen
 doc_type: Problem statement
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -21,13 +21,17 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Concept changed at Amish's direction from a stationary stepper generator to a walking-treadmill vehicle
+- version: "0.4"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: TRL 3. Record Amish's decisions (SGN-DDR-001) on budget, legal route and co-design partners; SwapCell interface v0.3; numbers checked against SGN-CAL-001
 ---
 
 # StepGen problem statement
 
 Many people who would benefit from an electric bike never use one because riding needs cycling skill, confidence on pedals and a seated posture that does not suit everyone. Walking is the one way of moving that almost everyone already knows. StepGen asks whether a small electric vehicle can be driven by walking: the rider stands upright on a short treadmill belt between the wheels, walks at an ordinary pace, and the vehicle moves forward at e-bike speed.
 
-> **Concept change.** Amish decided on 2026-09-24 that StepGen is a walking-treadmill vehicle in the manner of the Dutch Lopifit walking bike, not a stationary stepper generator. The earlier generator concept, which charged a PowerBox, is dropped entirely. Version 0.2 of this document describes the earlier concept and remains in Git history.
+> **Concept change.** Amish decided on 2026-09-24 that StepGen is a walking-treadmill vehicle in the manner of the Dutch Lopifit walking bike, not a stationary stepper generator. The earlier generator concept, which charged a PowerBox, is dropped entirely. Version 0.2 of this document describes the earlier concept and remains in Git history. On 2026-09-25 Amish accepted the TRL 2 recommendations, including a $650 budget, the route for the legal question and the move to SwapCell interface v0.3 (SGN-DDR-001).
 
 ## The problem
 
@@ -42,7 +46,7 @@ Walking needs no new skill. On a walking vehicle the rider stands, holds a handl
 
 ## Why the belt is a control input, not the engine
 
-A person walking puts only a small horizontal force into the ground, because walking is mostly about supporting and moving body weight, not pushing backward hard. On a free-running belt this is about 15 to 30 N (3 to 7 lbf) at 4 to 6 km/h, or roughly 20 to 40 W of mechanical power (estimate, see SGN-PRC-001). A bicycle at 20 km/h on the flat needs about 135 W at the wheel for an 80 kg rider on this vehicle. A purely mechanical belt-to-wheel drive would therefore move at about walking pace and would feel harder than walking, and people who built such drives report that they are slower than simply walking ([SolidSmack, "Walk Don't Ride"](https://www.solidsmack.com/design/evolution-unusual-treadmill-bicycle/)).
+A person walking puts only a small horizontal force into the ground, because walking is mostly about supporting and moving body weight, not pushing backward hard. On a free-running belt over a roller bed this is about 22 to 30 N (5 to 7 lbf) at 5 km/h, or roughly 30 to 41 W of mechanical power (estimate, see SGN-CAL-001). This vehicle at 20 km/h on the flat needs about 136 W at the wheel with an 80 kg rider. A purely mechanical belt-to-wheel drive would therefore move at about walking pace and would feel harder than walking, and people who built such drives report that they are slower than simply walking ([SolidSmack, "Walk Don't Ride"](https://www.solidsmack.com/design/evolution-unusual-treadmill-bicycle/)).
 
 StepGen is framed around that fact. The belt tells the vehicle that the rider is walking and how fast; an electric hub motor supplies most of the propulsion; and a shared SwapCell battery pack supplies the energy. This is also how the Lopifit works: its 250 W motor drives the vehicle, and the belt does not recharge the battery ([New Atlas](https://newatlas.com/urban-transport/lopifit-electric-scooter-treadmill-bike-walking/)).
 
@@ -58,13 +62,15 @@ StepGen is framed around that fact. The belt tells the vehicle that the rider is
 
 ## Constraints
 
-- Garage-buildable prototype with a concept budget of $400 USD in `project.yaml`, excluding the SwapCell pack. The first estimate is over this figure (see SGN-PRC-001).
-- Uses the shared SwapCell pack (interface v0.2: 13S lithium-ion, about 46.8 V nominal, 39.0 to 54.6 V, about 468 Wh). StepGen must not change the interface locally; conflicts go back to the SwapCell project.
+- Garage-buildable prototype with a budget of $650 USD in `project.yaml` (decided by Amish, 2026-09-25), excluding the SwapCell pack, which is priced once in the SwapCell project. The priced BOM is about $713, over this figure (see SGN-CAL-001).
+- Uses the shared SwapCell pack (interface v0.3: 13S lithium-ion, about 46.8 V nominal, 39.0 to 54.6 V, about 468 Wh, 2.85 kg), with a 10 kΩ coding resistor in the INTERLOCK loop for wake and a vehicle receiver to latch class V1. StepGen must not change the interface locally; conflicts go back to the SwapCell project.
 - Legal in intent: stay inside pedelec-like limits (250 W rated motor, assist cut before 25 km/h, motor only while the rider walks) so the vehicle can be argued to be as safe and as limited as an e-bike. Whether it legally counts as one is an open question (see below).
 - Safe for untrained riders: no reachable pinch points, motor cut-off when the rider stops walking, lets go of a lanyard or pulls a brake.
 - Rider can put a foot on the ground easily: low deck, open sides.
 - Fits a cycle lane, a lift and a hallway: narrow and not much longer than a long bicycle.
 - Every circuit stays below 60 V DC.
+
+> **Safety:** StepGen puts a standing person on a moving belt on a moving vehicle at up to 25 km/h, powered by a 468 Wh lithium-ion pack at up to 54.6 V DC. Falls, pinch points at the belt rollers and rear tire, braking with feet on a belt, pack retention and battery fire are the main hazards; SGN-PRC-001 lists the controls. Nothing in this repo clears the design for building or riding.
 
 ## Legal status
 
@@ -73,7 +79,7 @@ On current rules StepGen does not clearly fit the e-bike category anywhere, beca
 - **EU.** Pedal-assisted cycles with a continuous rated motor power up to 250 W, whose assistance is cut before 25 km/h and only while the rider pedals, are excluded from moped type approval ([Wikipedia summary of EN 15194 and Regulation 168/2013](https://en.wikipedia.org/wiki/Pedelec)). A walking vehicle has no pedals. In the Netherlands, guidance for walking bikes says an electric walking bike may use the pavement only up to 6 km/h and must otherwise use the cycle path or road, and that liability insurance is required for electric versions ([Scouters.nl](https://www.scouters.nl/hulpmiddel-keuze/loopfiets-volwassenen/)). Status in other member states is not established here.
 - **US.** Federal law defines a low-speed electric bicycle as a two- or three-wheeled vehicle with fully operable pedals and a motor under 750 W with a top motor-only speed under 20 mph ([15 USC 2085](https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title15-section2085&num=0&edition=prelim)). Most states use three classes: class 1 (assist only while pedalling, to 20 mph), class 2 (throttle, to 20 mph) and class 3 (assist only while pedalling, to 28 mph), and all of them require operable pedals ([Redtail, state guide](https://redtailebikes.com/blogs/journal/electric-bike-laws)).
 
-The design therefore targets the stricter EU limits and treats legal classification as a question to resolve before any road use. That question is for Amish.
+The design therefore targets the stricter EU limits. Amish decided on 2026-09-25 that a first target country is picked and the vehicle's legal category confirmed there before any road use. Which country is still open, awaiting Amish.
 
 ## Out of scope
 
@@ -95,7 +101,7 @@ The design therefore targets the stricter EU limits and treats legal classificat
 
 Design with, not for: this design is for people the author may not be part of, so requirements come from the people who will use it.
 
-- [ ] Identify a local partner organization (Helpful Engineering network, NGO, cycling charity, older-adult group or university)
+- [ ] Identify a local partner organization (Helpful Engineering network, NGO, cycling charity, older-adult group or university). By Amish's 2026-09-25 rule, community designs pick co-design partners per area later, so the partner stays open.
 - [ ] Run co-design sessions with intended users; record who, where and what was learned
 - [ ] Validate trip distance, route, speed, balance, step-off and cost assumptions in the field
 - [ ] Revise requirements (REQ) from findings before freezing the design
@@ -109,6 +115,7 @@ First-session questions:
 
 ## Open questions
 
-- Which user group and partner to start with: non-cycling adults, older adults, or commuters? Proposed, awaiting Amish.
+- Which user group to start with: non-cycling adults, older adults, or commuters? Proposed, awaiting Amish (no recommendation). The partner is picked later, per area.
 - Can a two-wheeled walking vehicle be balanced by people who never learned to cycle, or does the first prototype need three wheels? To be learned in co-design.
-- What is the legal category of a pedal-less walking vehicle in the first target country? Proposed, awaiting Amish.
+- Which first target country, and what is the legal category of a pedal-less walking vehicle there? The route is decided (confirm before any road use); the country is proposed, awaiting Amish.
+- Is a 1.0 m belt long enough for the intended users? SGN-CAL-001 shows it fits a 1.75 m rider only up to 5 km/h. To be learned in co-design.

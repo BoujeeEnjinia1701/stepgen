@@ -1,5 +1,78 @@
 # Review note: StepGen
 
+## Session 2026-09-25: TRL 3
+
+TRL 3 (analytical proof of concept on paper) is reached and is the hard stop. TRL 4 is on hold by Amish's instruction ("Make sure we don't proceed to TRL 4 on any of them"). The design meets its range, speed, braking, step-off, power and SwapCell interface requirements on paper, but **R12 (cost) is not met** at $713 against the new $650 budget, and R1, R6 and R10 are at risk.
+
+### What was done
+
+- `docs/decisions/0001-trl2-review-decisions.md` (SGN-DDR-001 v0.1): Amish's 2026-09-25 decisions on every TRL 2 review item that had a recommendation, the cross-cutting approvals (SwapCell interface v0.3, shared-pack pricing, co-design partners later), the area move, and the items that stay open.
+- `docs/04-calcs/01-sizing.md` (SGN-CAL-001 v0.1) with `docs/04-calcs/sizing.py` and `docs/04-calcs/results.csv`: geometry, mass and centre of mass, road load, energy and range, hill and acceleration, belt drag and belt length, control timing, braking and belt slip, cornering, deck-rail and steering-column strength, SwapCell v0.3 wake and latch class V1, and cost. The script reads the model parameters, the BOM and the budget, and prints every number the note quotes.
+- `cad/src/model.py`: parametric build123d model (all key dimensions in `PARAMS`, derived geometry in `geometry()`), exporting `cad/step/stepgen-assembly.step`, `stepgen-frame.step`, `stepgen-deck.step`, `stepgen-receiver.step` and matching STL files in `cad/stl/`. Changes from the TRL 2 massing model: 30 mm fork offset (trail 58 mm instead of about 90 mm), head tube moved back 30 mm so the length stays 2.35 m, 38 mm steering column, class V1 receiver cradle with an over-centre lever, stowed kickstand.
+- `cad/src/sheets.py` and `cad/drawings/SGN-DWG-001` (SVG, PDF, PNG): general arrangement at Rev P1, third-angle views at 1:20, isometric view and a key-dimension and interface box, marked "CONCEPT, NOT FOR FABRICATION" and "PRELIMINARY, NOT FOR FABRICATION". SGN-DWG-001 was free; the concept sheet is SGN-DWG-010.
+- `cad/src/concept_media.py`: now imports its geometry from `model.py`. All media regenerated and checked by eye: hero, blueprint SGN-DWG-010, cutaway, exploded view (callouts 1 to 15), flow (estimates marked, numbers from SGN-CAL-001), `model.glb` and `viewer.html`. Temporary `media/_views*` folders deleted.
+- `bom/bom.csv` and `bom/bom-notes.md`: all 16 lines priced with a supplier or supplier type; pack at $0.00, priced once in SwapCell.
+- `docs/01-problem.md`, `docs/02-concept.md`, `docs/03-requirements.md`: decisions recorded, SwapCell interface v0.3, numbers corrected to SGN-CAL-001, new R13 (pack retention to latch class V1), R12 at $650, a status column in the requirements, safety notes added to the problem statement and requirements. **Version note:** these three documents were already at 0.3 from the earlier 2026-09-25 concept change, so they are now at **0.4** (the brief asked for 0.3, which would not be a new version).
+- `project.yaml`: `trl: 3`, `trl_target: 3`, `trl_evidence` lists the documents, CAL-001, model, STEP files, drawing and BOM; `area: Mobility and Logistics`; `budget_usd: 650`; the `cleantech` tag removed. Pitch and problem unchanged (no rewording was recommended).
+- `README.md`: TRL 3 badge, area, budget, TRL 3 numbers and links to the drawing and sizing note.
+- `docs/pdf/`: PDFs of every controlled document at its current version.
+
+### Requirements (SGN-CAL-001, Table 5)
+
+| ID | Status | Value |
+| --- | --- | --- |
+| R12 cost | **Not met** | $713 excluding the pack against $650; about $538 on a salvage route |
+| R1 walking on the belt | At risk | 1.00 m usable, 22 to 30 N push; fits a 1.75 m rider only up to 5 km/h |
+| R6 hill | At risk | 233 W for 8 % at 8 km/h, 7 % margin to 250 W |
+| R10 size and mass | At risk | 2.35 m, 0.61 m met; 36.8 kg with pack leaves 3.2 kg |
+| R9 guards | Not verifiable at TRL 3 | Guards modelled; ISO 13857 gaps need hardware |
+| R13 pack retention (class V1) | Not verifiable at TRL 3 | 330 N preload, lever ratio 6.6, bolt factor 22 at 25 g |
+| R2 motor only while walking | Met (on paper) | 261 ms belt stop to motor off; 30 ms from brakes or lanyard |
+| R3 speed and acceleration | Met (on paper) | 25 km/h cut, 15 km/h mode, 32 N m torque limit for 1.0 m/s² |
+| R4 motor class | Met (on paper) | 250 W rated |
+| R5 range | Met | 45 km at 20 km/h on the flat (9.1 Wh/km); about 32 km in real use |
+| R7 braking | Met (on paper) | 8.0 m from 25 km/h; 9.6 m on the rear brake alone |
+| R8 step-off | Met | Belt top 240 mm |
+| R11 SwapCell v0.3 | Met (on paper) | 10 kΩ coded INTERLOCK (0.30 V), heartbeat mode 2, 8.5 A maximum |
+
+Other results without a requirement: deck-rail weld fatigue is **at risk** (37.6 MPa walking stress range against a 38.8 MPa limit); the 38 x 2 mm steering column has a factor of 2.0; lean clearance is 30°; belt tension of 500 N per run keeps the belt from slipping under 240 N of braking push.
+
+### Decisions recorded (SGN-DDR-001)
+
+Decided by Amish, 2026-09-25, go with recommendation: two-wheel long-wheelbase form factor (three-wheel open until co-design); 20 in wheels; 250 W rear geared hub, 25 km/h cut, 15 km/h beginner mode; 30 km at 20 km/h range target; no roller generator in the first concept; area Mobility and Logistics; budget $650, pack excluded; confirm the legal category in a first target country before any road use; a decision record. Cross-cutting: SwapCell interface v0.3 (StepGen uses items W and V, not C); shared packs priced once; co-design partners picked per area later.
+
+### Proposed, awaiting Amish
+
+1. **First user group.** Non-cycling adults, older adults or commuters. No recommendation.
+2. **First target country** for the legal category. No recommendation.
+3. **Cost overrun (R12).** Options: (a) keep $650 and make the salvage route (used walking-pad treadmill, donor 20 in bike; about $538) the reference build, with new parts as fallback; (b) raise `budget_usd` to about $720 for new parts; (c) cut scope (for example drop the display for a simple LED). Recommended: (a). `project.yaml` stays at $650.
+4. **Belt length (R1 against R10).** Options: (a) keep the 1.05 m roller pitch and 2.35 m length until co-design shows the riders' heights and pace; (b) lengthen to about 1.19 m, which fits a 1.90 m rider at 6 km/h but makes the vehicle about 2.49 m and needs R10 relaxed to 2.5 m; (c) cap belt speed in firmware for the short belt. Recommended: (a), revisit after co-design.
+5. **Deck rails.** Change from 50 x 25 x 2 mm to 60 x 30 x 2 mm to take the weld stress range from 37.6 to 25.5 MPa, for 1.08 kg (mass then about 37.9 kg with pack). Recommended. Not applied to the model, because it uses a third of the R10 mass margin.
+6. **Key switch in the INTERLOCK loop.** Options: (a) a key switch in series with the 10 kΩ coding resistor (off opens the loop and sleeps the pack; on wakes it; also a simple immobiliser); (b) a soft power button that sends a sleep request, with the pack's own wake button to start. Recommended: (a), used at a standstill only.
+7. **Flag to the SwapCell project (not a StepGen decision).** v0.3 does not say whether a pack in legacy discharge moves to mode 2 when a heartbeat arrives, which a host powered from the pack output needs after a key-on wake.
+
+### Safety concerns
+
+- Falls on a moving belt, a rider stopping abruptly or leaving the deck at speed: free-running belt, 261 ms motor cut-off, 30 ms lanyard and brake cut, low open deck. Rider dynamics need a test.
+- Braking with feet on a belt: the sprag and 500 N belt tension hold the belt; the rider must resist about 240 N at 3 m/s², and harder stops can pitch the rider over the bar.
+- Pinch points at both belt nips, the rear tire behind the heel and the spokes: guards modelled, ISO 13857 gaps unverified (R9).
+- Weld fatigue at the deck rails is at the limit (proposal 5).
+- Pack retention: a pack leaving its cradle at speed is a 2.85 kg projectile with live contacts; class V1 is specified but unverified (R13).
+- The key switch cuts the pack at once, without warn-then-derate; use only at a standstill.
+- Lithium pack at up to 54.6 V: SwapCell BMS, coded interlock and derating apply; charge only in a dock; 20 A harness fuse. Helmet essential; the rider's head is about 2 m up.
+- Legal category unresolved: no road use until it is confirmed in the target country.
+
+### Other notes
+
+- No TRL 4 material exists in the repo (`build-log/` holds only its README; `electronics/` and `firmware/` are empty). None was created.
+- The TRL 2 note listed no unchecked citations, and no new citations were added, so no web check was needed.
+
+### Recommended next step
+
+TRL 4 is on hold by Amish's instruction, and this session stops at TRL 3. Next: Amish decides items 1 to 6 above, and the SwapCell project answers item 7. After that, paper work that stays within TRL 3: apply the chosen rail size and belt length to the model and recalculate, and a desk study of the legal category in the chosen country. Co-design sessions with users, once a partner is picked for the area, should come before any hardware.
+
+For the record only, TRL 4 would need: a test article (at least a belt-deck rig and a class V1 receiver cradle), a lab test plan and report (SGN-TST) covering belt drag and walking feel, motor cut-off timing, braking with a standing rider, weld details and V1 vibration and shock, and dated build-log entries. None of this should start until Amish lifts the hold.
+
 ## Session 2026-09-25: concept change to a walking-treadmill vehicle (TRL 2)
 
 ### Concept change (decided by Amish)

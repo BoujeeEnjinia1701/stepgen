@@ -1,24 +1,23 @@
 # BOM notes
 
-Prices are indicative concept estimates (TRL 2) and will be confirmed with named suppliers at TRL 3. Item numbers 1 to 15 match the exploded view (`media/exploded.png`); item 16 covers fasteners and consumables.
+Every line in `bom/bom.csv` is priced (TRL 3). Prices are estimates for one-off purchase in 2026 US dollars, with a supplier or supplier type; they are not quotes. Item numbers 1 to 15 match the exploded view (`media/exploded.png`), the components table in SGN-PRC-001 and the model in `cad/src/model.py`; item 16 (hardware, kickstand and consumables) has no callout. The totals below are printed by `docs/04-calcs/sizing.py` (SGN-CAL-001), which reads this BOM and the budget in `project.yaml`.
 
-**The SwapCell pack (item 11) is not included in the total.** It is listed at $0.00 so the numbering matches the exploded view. The pack is designed, costed and budgeted in the SwapCell project (about $370 in prototype parts), and the same pack is shared with SunSpoke, WaterWalker and PowerBox. This follows the PowerBox convention.
+**The SwapCell pack (item 11) is not included in the total.** By Amish's 2026-09-25 portfolio rule a shared SwapCell pack is priced once, in the SwapCell BOM (about $414 in prototype parts), and excluded from each dependent kit budget. It is listed at $0.00 so the numbering matches the exploded view.
 
-| Group | Items | Indicative cost |
+| Group | Items | Cost |
 | --- | --- | --- |
-| Frame, deck and belt | 1 to 5 | about $246 |
-| Wheels, motor, steering and brakes | 6 to 9 | about $235 |
-| Electrics and guards | 10, 12 to 15 | about $124 |
-| Hardware | 16 | about $25 |
-| **StepGen total, pack excluded** | 1 to 10, 12 to 16 | **about $630** |
-| SwapCell pack (not in total) | 11 | about $370 |
+| Frame, deck and belt | 1 to 5 | $246 |
+| Wheels, motor, steering and brakes | 6 to 9 | $262 |
+| SwapCell receiver (class V1), electrics and guards | 10, 12 to 15 | $167 |
+| Hardware, kickstand and consumables | 16 | $38 |
+| **StepGen total, pack excluded** | 1 to 10, 12 to 16 | **$713** |
+| SwapCell pack (not in total) | 11 | about $414, SwapCell BOM |
 
-The total of about $630 is about $230 over the $400 concept budget in `project.yaml` and requirement R12. Ways to reduce it:
+Against the $650 budget Amish set on 2026-09-25, the total is **$63 (10 %) over**, so requirement R12 is not met. Changes since TRL 2 ($630): the receiver cradle now meets SwapCell latch class V1 with an over-centre lever, a floating receptacle, the 10 kΩ INTERLOCK coding resistor and a key switch (item 10, $22 to $55, and item 13); the motor is specified for a 20 in wheel and the wheel build is priced separately (item 6, $95 to $110); the fork has a 30 mm offset (item 7, $60 to $70); a kickstand is added (item 16).
 
-- A salvaged walking-pad or folding treadmill could supply the belt, rollers and possibly the deck for about $30 to $60 instead of about $145 (items 2 and 3).
-- A salvaged children's or folding bike could supply both 20 in wheels, the fork, headset and brakes.
-- With both, the total might fall to about $450 to $500, still over $400.
+Ways to close the gap, proposed, awaiting Amish (see `docs/REVIEW.md`):
 
-A budget of about $650 is proposed, awaiting Amish (see `docs/REVIEW.md`). The budget in `project.yaml` is unchanged until Amish decides.
+- **Salvage route.** A used walking-pad treadmill for items 2 and 3 (about $40 instead of $145) and a donor 20 in bike for items 7 and 9 (about $50 instead of $120) bring the total to about $538. Recommended as the reference build path, with new parts as the fallback.
+- **Raise the budget** to about $720 for an all-new-parts build.
 
-The optional belt-roller generator (see SGN-PRC-001) is not in this BOM. It would add about $35 to $50 (a small BLDC motor, rectifier and boost stage) and is not recommended for the first concept.
+The optional belt-roller generator (see SGN-PRC-001) is not in this BOM. It would add about $35 to $50 (a small BLDC motor, rectifier and boost stage) and is not in the first concept (decided by Amish, 2026-09-25).

@@ -1,22 +1,35 @@
 # Card metadata consumed by https://amishchadha.com
 name: StepGen
 slug: stepgen
-area: CleanTech
-trl: 2                   # Technology Readiness Level, see .kit/STANDARDS.md section 9
+area: Mobility and Logistics
+trl: 3                   # Technology Readiness Level, see .kit/STANDARDS.md section 9
 trl_target: 3
 trl_evidence:
   - docs/01-problem.md
   - docs/02-concept.md
   - docs/03-requirements.md
+  - docs/decisions/0001-trl2-review-decisions.md
+  - docs/04-calcs/01-sizing.md
+  - docs/04-calcs/sizing.py
+  - docs/04-calcs/results.csv
+  - cad/src/model.py
+  - cad/step/stepgen-assembly.step
+  - cad/step/stepgen-frame.step
+  - cad/step/stepgen-deck.step
+  - cad/step/stepgen-receiver.step
+  - cad/drawings/SGN-DWG-001.svg
+  - cad/drawings/SGN-DWG-001.pdf
+  - bom/bom.csv
+  - bom/bom-notes.md
 shortlisted: false
 pitch: >-
   Walking-treadmill vehicle: the rider stands upright and walks at a normal pace on a short free-running belt between the wheels, a belt-speed sensor sets the assist of a 250 W hub motor, and the vehicle moves at e-bike speed (up to 25 km/h) on a shared SwapCell pack. Walking is the control input; the motor does the work.
 problem: >-
   Many people who would gain from an e-bike never ride one because cycling needs riding skill, balance on pedals and a seated posture that does not suit everyone, while walking is natural and needs none of these. Short trips of 2 to 15 km stay too long to walk and too costly by car. Design with, not for: requirements must come from co-design sessions and field trials with the intended users through a local partner.
-budget_usd: 400
+budget_usd: 650
 difficulty: 3  # 1 easiest, 5 hardest
 hero_image: media/hero.png
 licenses:
   hardware: CERN-OHL-S-2.0
   software: MIT
-tags: [cleantech, mobility, walking-vehicle, swapcell, open-hardware, cern-ohl-s]
+tags: [mobility, walking-vehicle, swapcell, open-hardware, cern-ohl-s]
