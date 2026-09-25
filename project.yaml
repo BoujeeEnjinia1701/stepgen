@@ -10,13 +10,13 @@ trl_evidence:
   - docs/03-requirements.md
 shortlisted: false
 pitch: >-
-  Manual stepper generator: the user walks in place on two rocker-linked pedals, one-way clutches turn both strokes into rotation of a flywheel, and a motor running as a generator charges a PowerBox. A realistic output is 40 to 100 W, or about 60 to 100 Wh stored per hour of stepping.
+  Walking-treadmill vehicle: the rider stands upright and walks at a normal pace on a short free-running belt between the wheels, a belt-speed sensor sets the assist of a 250 W hub motor, and the vehicle moves at e-bike speed (up to 25 km/h) on a shared SwapCell pack. Walking is the control input; the motor does the work.
 problem: >-
-  Homes in rural areas, informal settlements and outage-prone cities lose lights, phone charging and connectivity when the grid fails, and many have no roof space or sun for solar. Pedal generators need a bicycle and riding ability. Design with, not for: requirements must come from co-design sessions and field trials with the intended users through a local partner.
+  Many people who would gain from an e-bike never ride one because cycling needs riding skill, balance on pedals and a seated posture that does not suit everyone, while walking is natural and needs none of these. Short trips of 2 to 15 km stay too long to walk and too costly by car. Design with, not for: requirements must come from co-design sessions and field trials with the intended users through a local partner.
 budget_usd: 400
 difficulty: 3  # 1 easiest, 5 hardest
 hero_image: media/hero.png
 licenses:
   hardware: CERN-OHL-S-2.0
   software: MIT
-tags: [cleantech, open-hardware, cern-ohl-s]
+tags: [cleantech, mobility, walking-vehicle, swapcell, open-hardware, cern-ohl-s]

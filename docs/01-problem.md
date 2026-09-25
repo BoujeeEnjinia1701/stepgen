@@ -3,9 +3,9 @@ doc_id: SGN-PRB-001
 title: StepGen problem statement
 project: StepGen
 doc_type: Problem statement
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-09-24'
+date: '2026-09-25'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,80 +17,98 @@ revisions:
   date: '2026-09-24'
   author: Amish Chadha
   change: Populate to TRL 2 (users, context, constraints, out of scope, prior work, honest energy framing)
+- version: "0.3"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Concept changed at Amish's direction from a stationary stepper generator to a walking-treadmill vehicle
 ---
 
 # StepGen problem statement
 
-When the grid fails, many households lose the small loads that matter most: lights, phone charging, a radio and an internet router. These loads add up to only tens of watts, yet homes without roof space, sun or money for solar have no way to keep them running, and the human-powered options that exist mostly assume the user can ride a bicycle.
+Many people who would benefit from an electric bike never use one because riding needs cycling skill, confidence on pedals and a seated posture that does not suit everyone. Walking is the one way of moving that almost everyone already knows. StepGen asks whether a small electric vehicle can be driven by walking: the rider stands upright on a short treadmill belt between the wheels, walks at an ordinary pace, and the vehicle moves forward at e-bike speed.
+
+> **Concept change.** Amish decided on 2026-09-24 that StepGen is a walking-treadmill vehicle in the manner of the Dutch Lopifit walking bike, not a stationary stepper generator. The earlier generator concept, which charged a PowerBox, is dropped entirely. Version 0.2 of this document describes the earlier concept and remains in Git history.
 
 ## The problem
 
-Outage-prone cities, informal settlements and off-grid homes often lose power for hours at a time. A small battery power station such as the portfolio's PowerBox (a SwapCell-based pack of about 46.8 V nominal) can carry essential loads through an outage, but only if something recharges it. Solar is the usual answer. It fails when there is no secure roof or yard, during long cloudy or smoky periods, and at night.
+Short trips of 2 to 15 km (about 1 to 9 mi) to work, school, a market or a clinic are too long to walk comfortably and too short or too costly for a car or a taxi. E-bikes fill this gap well for people who already cycle. They leave out:
 
-Human power can fill part of that gap, but only part of it. A healthy adult can sustain roughly 50 to 100 W of mechanical work for an hour. After drivetrain and electrical losses that is tens of watt-hours stored, not kilowatt-hours. StepGen is framed around that honest number:
+- people who never learned to ride, which is common among adults in many countries and among women in some communities;
+- older adults and people with some balance or joint limits who are nervous on a saddle and pedals;
+- people whose clothing, such as long skirts or wraps, makes a diamond-frame bike awkward;
+- people for whom a seated, pedalling posture is uncomfortable, for example after hip or knee problems, while ordinary walking is fine.
 
-| Load (typical) | Energy | What one hour of stepping (about 35 to 70 Wh stored) covers |
-| --- | --- | --- |
-| LED lamp, 5 W | 5 Wh per hour of light | 4 lamps for about 2 to 3 h |
-| Phone charge | 10 to 15 Wh per charge | 3 to 5 phone charges |
-| Wi-Fi router, 8 to 12 W | about 10 Wh per hour | about 3 to 6 h of connectivity |
-| Radio, 2 to 5 W | 2 to 5 Wh per hour | an evening of listening |
-| Refrigerator | 1 to 2 kWh per day | Not covered. Days of stepping per day of use |
-| Kettle, 2 kW | about 100 Wh per boil | Not covered |
+Walking needs no new skill. On a walking vehicle the rider stands, holds a handlebar and walks. The walking motion is a natural control input: walk and the vehicle goes, stop walking and it slows. The rider gets light exercise at a walking effort while covering distance at bicycle speeds.
 
-StepGen will not power a home. It keeps communication and light going through an outage.
+## Why the belt is a control input, not the engine
 
-## Why a stepper and not a bicycle
+A person walking puts only a small horizontal force into the ground, because walking is mostly about supporting and moving body weight, not pushing backward hard. On a free-running belt this is about 15 to 30 N (3 to 7 lbf) at 4 to 6 km/h, or roughly 20 to 40 W of mechanical power (estimate, see SGN-PRC-001). A bicycle at 20 km/h on the flat needs about 135 W at the wheel for an 80 kg rider on this vehicle. A purely mechanical belt-to-wheel drive would therefore move at about walking pace and would feel harder than walking, and people who built such drives report that they are slower than simply walking ([SolidSmack, "Walk Don't Ride"](https://www.solidsmack.com/design/evolution-unusual-treadmill-bicycle/)).
 
-Pedal generators built on bicycles or bicycle trainers work, but they exclude many people: those without a bicycle, those who never learned to ride, older adults with balance concerns, people whose clothing makes riding impractical, and children too small for the frame. Walking in place on two pedals is a movement nearly everyone already knows. A handrail carries balance, no special clothing is needed, and the same machine suits users of very different heights because there is no saddle or crank reach to set.
-
-The stepper also has an honest limit: body weight does the work, so a light user produces less power than a heavy one at the same cadence, and sustained stepping at 60 steps per minute is vigorous exercise. The requirements treat both as design inputs.
+StepGen is framed around that fact. The belt tells the vehicle that the rider is walking and how fast; an electric hub motor supplies most of the propulsion; and a shared SwapCell battery pack supplies the energy. This is also how the Lopifit works: its 250 W motor drives the vehicle, and the belt does not recharge the battery ([New Atlas](https://newatlas.com/urban-transport/lopifit-electric-scooter-treadmill-bike-walking/)).
 
 ## Users and context
 
 | User | Need | Context |
 | --- | --- | --- |
-| Household in an outage-prone city | Keep phones, lights and router running through daily or weekly outages | Apartment or small house; limited floor space; no roof access |
-| Household in an informal settlement | Reliable light and phone charging where grid supply is irregular or informal | Small dwellings; security concerns; low cash budget |
-| Off-grid rural home | A top-up source for a small battery when solar is weak | Seasonal cloud, dust or smoke; long evenings |
-| People who cannot or do not cycle | A human-power option that does not need a bicycle, riding skill or balance | Older adults, people with some mobility limits, people in clothing unsuited to riding |
-| Community hub (clinic, school, shelter) | Shared charging point run by volunteers in turns | Several users per day of different body weights |
+| Adults who do not cycle | Cover 2 to 15 km trips without learning to ride | Towns and peri-urban areas with cycle lanes or quiet roads |
+| Older adults and people with mild balance or joint limits | An upright, familiar movement with a handlebar to hold | Short errands, clinic visits; must be able to step off easily |
+| Commuters who want light exercise | Arrive without sweating, get some walking in | Flat to rolling urban routes, 5 to 15 km each way |
+| Riders who share batteries across portfolio vehicles | One pack that also runs SunSpoke, WaterWalker assist and a PowerBox | Households or groups with a SwapCell dock |
+| Local builders and bike mechanics | A frame and parts they can build, fix and adapt | Garage or market-town workshop with a welder |
 
 ## Constraints
 
-- Garage-buildable prototype for about $400 USD, using bicycle parts, standard steel tube and off-the-shelf electronics.
-- Charges a PowerBox pack at about 46.8 V nominal. Every conductor must stay at safe extra-low voltage, under 60 V DC, in all conditions.
-- Fits in a small room: about the floor area of a doormat and a chair, and light enough for two people to move.
-- Safe for untrained users of 40 to 120 kg: no exposed moving parts, a handrail, and no hazard if the load controller fails.
-- Quiet enough to use indoors at night.
-- No mains connection; the stepper only feeds the PowerBox.
+- Garage-buildable prototype with a concept budget of $400 USD in `project.yaml`, excluding the SwapCell pack. The first estimate is over this figure (see SGN-PRC-001).
+- Uses the shared SwapCell pack (interface v0.2: 13S lithium-ion, about 46.8 V nominal, 39.0 to 54.6 V, about 468 Wh). StepGen must not change the interface locally; conflicts go back to the SwapCell project.
+- Legal in intent: stay inside pedelec-like limits (250 W rated motor, assist cut before 25 km/h, motor only while the rider walks) so the vehicle can be argued to be as safe and as limited as an e-bike. Whether it legally counts as one is an open question (see below).
+- Safe for untrained riders: no reachable pinch points, motor cut-off when the rider stops walking, lets go of a lanyard or pulls a brake.
+- Rider can put a foot on the ground easily: low deck, open sides.
+- Fits a cycle lane, a lift and a hallway: narrow and not much longer than a long bicycle.
+- Every circuit stays below 60 V DC.
+
+## Legal status
+
+On current rules StepGen does not clearly fit the e-bike category anywhere, because e-bike definitions assume pedals.
+
+- **EU.** Pedal-assisted cycles with a continuous rated motor power up to 250 W, whose assistance is cut before 25 km/h and only while the rider pedals, are excluded from moped type approval ([Wikipedia summary of EN 15194 and Regulation 168/2013](https://en.wikipedia.org/wiki/Pedelec)). A walking vehicle has no pedals. In the Netherlands, guidance for walking bikes says an electric walking bike may use the pavement only up to 6 km/h and must otherwise use the cycle path or road, and that liability insurance is required for electric versions ([Scouters.nl](https://www.scouters.nl/hulpmiddel-keuze/loopfiets-volwassenen/)). Status in other member states is not established here.
+- **US.** Federal law defines a low-speed electric bicycle as a two- or three-wheeled vehicle with fully operable pedals and a motor under 750 W with a top motor-only speed under 20 mph ([15 USC 2085](https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title15-section2085&num=0&edition=prelim)). Most states use three classes: class 1 (assist only while pedalling, to 20 mph), class 2 (throttle, to 20 mph) and class 3 (assist only while pedalling, to 28 mph), and all of them require operable pedals ([Redtail, state guide](https://redtailebikes.com/blogs/journal/electric-bike-laws)).
+
+The design therefore targets the stricter EU limits and treats legal classification as a question to resolve before any road use. That question is for Amish.
 
 ## Out of scope
 
-- Mains-voltage output. The PowerBox handles any inverter; StepGen stays at low-voltage DC.
-- Running high-power loads (fridges, kettles, heaters, pumps) or whole-home backup.
-- A built-in battery. Storage lives in the PowerBox.
-- Exercise tracking beyond steps, watts and watt-hours on the display.
-- Grid export or any grid connection.
+- Generating household electricity. The earlier stepper generator concept is dropped; StepGen does not charge a PowerBox. It draws from a SwapCell pack like the other portfolio vehicles.
+- Cargo carrying beyond a small bag or basket.
+- Speeds above 25 km/h, or motors above 250 W rated.
+- Mains-voltage electronics or a built-in charger. Packs charge in a SwapCell dock.
+- Off-road use.
 
 ## Prior work
 
-- **Bicycle pedal generators and generator trainers.** Well documented in the maker and development community. Fit riders sustain roughly 75 to 150 W. Their limits are the need for a bicycle and riding ability, and many designs leave chains and rollers exposed.
-- **Hand-crank generators** in radios, torches and phone chargers. Very accessible but limited to roughly 5 to 20 W, which is too little to recharge a power station usefully.
-- **Self-powered gym equipment.** Commercial steppers, ellipticals and bikes that power their own consoles or feed energy back to a building. They show that stepping motions drive generators well, but they are costly, heavy and not built for low-income settings.
-- **Energy-harvesting floor tiles.** These capture a few joules per footstep, so they suit sensors and signage, not household charging.
-- **Stair-stepper exercise machines** already use rocker-linked pedals with one-way clutches and a flywheel or fan brake. StepGen borrows this proven mechanism and replaces the brake with a generator.
+- **Lopifit (Netherlands).** An electric walking bike with a treadmill belt between a 28 in front wheel and a 20 in rear wheel, a 250 W motor, a 960 Wh battery of about 5 kg, disc brakes front and rear, a top speed of 25 km/h and a claimed range of 50 to 70 km. It is about 2.22 m long, 0.42 m wide and about 55 kg, with a handlebar height of about 1.2 m, and costs from about €2,999 ([Lopifit](https://www.lopifit.com/what-is-a-lopifit/)). Its handles carry sensors that stop the treadmill with a small hand movement. It proves the concept works and is sold, but its price and mass put it out of reach of the users above.
+- **Mechanical treadmill bikes.** Belt-driven bicycles without a motor have been built by hobbyists. The reported result is that they are slower than walking because the belt cannot deliver useful torque at low speed ([SolidSmack](https://www.solidsmack.com/design/evolution-unusual-treadmill-bicycle/)).
+- **Stand-up elliptical bikes (ElliptiGO).** Mechanical, upright, with an elliptical stride that does deliver strong propulsion, but this is a running-like exercise machine for fit users, not a walking vehicle ([Wikipedia](https://en.wikipedia.org/wiki/ElliptiGO)). The upright posture also costs more air drag than a crouched cyclist.
+- **Kick scooters and e-scooters.** Standing, easy to learn, but e-scooters use a throttle and give no exercise, and small wheels cope poorly with rough surfaces.
+- **Portfolio siblings.** SunSpoke (bolt-on e-bike kit) and WaterWalker (walking water carrier with optional assist) share the SwapCell pack and the same 250 W hub motor class.
 
 ## User research and co-design
 
-This design is for communities the author is not part of, so requirements come from the people who will use it.
+Design with, not for: this design is for people the author may not be part of, so requirements come from the people who will use it.
 
-- [ ] Identify a local partner organization (Helpful Engineering network, NGO or university)
+- [ ] Identify a local partner organization (Helpful Engineering network, NGO, cycling charity, older-adult group or university)
 - [ ] Run co-design sessions with intended users; record who, where and what was learned
-- [ ] Validate load, distance, terrain and cost assumptions in the field
+- [ ] Validate trip distance, route, speed, balance, step-off and cost assumptions in the field
 - [ ] Revise requirements (REQ) from findings before freezing the design
+
+First-session questions:
+
+- Does walking on a moving vehicle feel safe, and at what speed does it stop feeling safe?
+- Can users step on and off, and put a foot down, without help?
+- Is two-wheel balance acceptable for non-cyclists, or is a three-wheel version needed?
+- Where would the vehicle be kept, and can users lift or wheel it into a building?
 
 ## Open questions
 
-- Which user group and partner to start with: an outage-prone city household network, a settlement community organization, or a community hub? Proposed, awaiting Amish.
-- Is sustained stepping acceptable to older or less fit users, or should StepGen add a seated option later? To be learned in co-design.
+- Which user group and partner to start with: non-cycling adults, older adults, or commuters? Proposed, awaiting Amish.
+- Can a two-wheeled walking vehicle be balanced by people who never learned to cycle, or does the first prototype need three wheels? To be learned in co-design.
+- What is the legal category of a pedal-less walking vehicle in the first target country? Proposed, awaiting Amish.

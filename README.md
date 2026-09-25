@@ -4,37 +4,39 @@
 
 **Area:** CleanTech · **TRL:** 2 of 9 (concept formulated) · **Prototype budget:** about $400 USD · **Difficulty:** 3 of 5
 
-Manual stepper generator: the user walks in place on two rocker-linked pedals, one-way clutches turn both strokes into rotation of a flywheel, and a motor running as a generator charges a PowerBox. A realistic output is 40 to 100 W, or about 60 to 100 Wh stored per hour of stepping.
+Walking-treadmill vehicle: the rider stands upright and walks at a normal pace on a short free-running belt between the wheels, a belt-speed sensor sets the assist of a 250 W hub motor, and the vehicle moves at e-bike speed (up to 25 km/h) on a shared SwapCell pack. Walking is the control input; the motor does the work.
 
-![StepGen concept](media/hero.png)
+![StepGen concept: a rider walking upright on the belt deck between two 20 in wheels](media/hero.png)
 
 [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Review note](docs/REVIEW.md)
 
 ## Problem
 
-Homes in rural areas, informal settlements and outage-prone cities lose lights, phone charging and connectivity when the grid fails, and many have no roof space or sun for solar. Pedal generators need a bicycle and riding ability. Design with, not for: requirements must come from co-design sessions and field trials with the intended users through a local partner.
+Many people who would gain from an e-bike never ride one because cycling needs riding skill, balance on pedals and a seated posture that does not suit everyone, while walking is natural and needs none of these. Short trips of 2 to 15 km stay too long to walk and too costly by car. Design with, not for: requirements must come from co-design sessions and field trials with the intended users through a local partner.
 
 ## Concept
 
-Manual stepper generator: the user walks in place on two rocker-linked pedals, one-way clutches turn both strokes into rotation of a flywheel, and a motor running as a generator charges a PowerBox. A realistic output is 40 to 100 W, or about 60 to 100 Wh stored per hour of stepping.
+Walking-treadmill vehicle: the rider stands upright and walks at a normal pace on a short free-running belt between the wheels, a belt-speed sensor sets the assist of a 250 W hub motor, and the vehicle moves at e-bike speed (up to 25 km/h) on a shared SwapCell pack. Walking is the control input; the motor does the work.
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
 ## Key components
 
-- Steel base and rocker-linked pedals
-- Chain or rack drive with one-way clutches (2)
-- Flywheel
-- BLDC motor used as generator, geared up
-- Rectifier and load controller (sets step resistance)
-- Display for steps, watts and watt-hours
-- Output lead to PowerBox
+- Long-wheelbase steel frame with two 20 in wheels
+- Free-running treadmill belt on a roller bed, with an anti-reverse clutch
+- Belt-speed sensor that sets the motor assist
+- 250 W geared rear hub motor and 48 V controller, assist cut at 25 km/h (proposed)
+- Shared 48 V SwapCell pack in a down-tube cradle (not in the parts cost)
+- Two disc brakes with motor cut-off levers and a lanyard stop switch
+- Guards over the belt rollers and the rear tire
+
+First-order estimates: about 9 Wh/km at 20 km/h, about 35 to 46 km per SwapCell pack on the flat, about 35 kg without the pack, and about $630 in parts excluding the pack (over the $400 budget; see the [review note](docs/REVIEW.md)).
 
 The working bill of materials is in [bom/bom.csv](bom/bom.csv).
 
 ## Safety
 
-> Guard all chains, gears and the flywheel. Pedals need non-slip treads and a handrail. The generator output must stay at safe low voltage (under 60 V DC).
+> A rider stands on a moving belt on a moving vehicle. The motor must run only while the rider walks and stop when the belt stops, a brake is pulled or the lanyard comes out. Guard the belt rollers and the rear tire, keep the deck low with open sides, limit speed to 25 km/h, and wear a helmet. The SwapCell pack is a 468 Wh lithium-ion battery; every circuit stays under 60 V DC.
 
 ## Repository layout
 
