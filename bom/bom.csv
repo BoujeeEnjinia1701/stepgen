@@ -1,8 +1,14 @@
 item,qty,spec,supplier,unit_cost_usd,make_buy,notes
-Steel base and rocker-linked pedals,,,,,,
-Chain or rack drive with one-way clutches (2),,,,,,
-Flywheel,,,,,,
-"BLDC motor used as generator, geared up",,,,,,
-Rectifier and load controller (sets step resistance),,,,,,
-"Display for steps, watts and watt-hours",,,,,,
-Output lead to PowerBox,,,,,,
+1 Base frame,1,"40 x 40 x 2 mm steel square tube, about 4.5 m; 850 x 620 mm frame with pivot and bearing posts",Local steel supplier,40.00,make,Indicative price; material and paint
+2 Pedals on rocker,1,"Two 380 mm steel pedal arms, non-slip treads, rear pivot bushes, rocker beam and pivot, adjustable end stops with elastomer bumpers",Local steel supplier and hardware store,40.00,make,Indicative price
+3 One-way clutches and jackshaft,1,"Two 16T single-speed bicycle freewheels, 20 mm steel shaft, two pillow-block bearings",Bicycle shop or online retailer,30.00,buy,Indicative price; freewheel vs sprag clutch proposed awaiting Amish
+4 Chain drive 4:1,1,"Two pedal chain lengths with return springs; 48T and 12T sprockets; bicycle or #40 chain",Bicycle shop or online retailer,30.00,buy,Indicative price
+5 Belt step-up 10:1,1,"Poly-V (PJ) pulleys about 200 mm and 20 mm, belt, 15 mm intermediate shaft, two bearings",Online power transmission retailer,30.00,buy,Indicative price
+6 Flywheel,1,"300 mm x 6 mm laser-cut steel disc with keyed hub, balanced; about 3.3 kg",Local laser cutting service,25.00,buy,Indicative price
+7 BLDC generator,1,"63 mm class sensorless outrunner, Kv about 60 rpm/V, 250 W or more",Hobby or e-mobility parts retailer,45.00,buy,Indicative price; choice proposed awaiting Amish
+8 Drivetrain guard,1,"1 mm aluminum sheet shell with steel mesh vents, tool-only fasteners",Local sheet metal supplier,30.00,make,Indicative price
+9 Handrail,1,"32 mm steel tube: two posts, top bar and two side grips; foam grips",Local steel supplier,30.00,make,Indicative price
+10 Rectifier and load controller,1,"Three-phase bridge rectifier, microcontroller board, buck-boost charger module (39 to 54.6 V out, 3 A limit), brake resistor, fuse, emergency stop button",Electronics distributor,50.00,buy,Indicative price
+11 Display and level selector,1,"Small LCD or OLED display, rotary knob, enclosure",Electronics distributor,10.00,buy,Indicative price
+12 Output lead to PowerBox,1,"2 m twin cable 2.5 mm², inline fuse, polarized connector to match PowerBox",Electronics distributor,12.00,buy,Indicative price; connector to confirm with PowerBox
+13 Hardware and consumables,1,"Bolts, nuts, washers, welding wire, paint, cable ties",Hardware store,25.00,buy,Indicative price

@@ -6,6 +6,10 @@
 
 Manual stepper generator: the user walks in place on two rocker-linked pedals, one-way clutches turn both strokes into rotation of a flywheel, and a motor running as a generator charges a PowerBox. A realistic output is 40 to 100 W, or about 60 to 100 Wh stored per hour of stepping.
 
+![StepGen concept](media/hero.png)
+
+[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Review note](docs/REVIEW.md)
+
 ## Problem
 
 Homes in rural areas, informal settlements and outage-prone cities lose lights, phone charging and connectivity when the grid fails, and many have no roof space or sun for solar. Pedal generators need a bicycle and riding ability. Design with, not for: requirements must come from co-design sessions and field trials with the intended users through a local partner.
