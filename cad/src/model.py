@@ -32,7 +32,7 @@ PARAMS = {
     "bed_r": 15.0,             # 30 mm idler rollers
     # Frame
     "rail_y": 235.0,           # deck rail centre line from the vehicle centre line
-    "rail_w": 25.0, "rail_h": 50.0, "rail_t": 2.0,   # 50 x 25 x 2 mm RHS on edge
+    "rail_w": 30.0, "rail_h": 60.0, "rail_t": 2.0,   # 60 x 30 x 2 mm RHS on edge (SGN-DDR-002: was 50 x 25 x 2)
     "rail_x0": 270.0, "rail_x1": 1420.0,
     "down_tube_r": 22.0,       # 44 mm tube
     # Steering (TRL 3: fork offset added so trail is about 58 mm)

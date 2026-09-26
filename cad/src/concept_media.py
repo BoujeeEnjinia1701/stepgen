@@ -77,7 +77,7 @@ def flow_figure(out):
         xs, ys = zip(*pts)
         ax.plot(xs, ys, color=color, ls=ls, lw=w, alpha=alpha)
 
-    ax.text(0.0, 7.05, "StepGen: energy and control flow at a 20 km/h cruise, flat road, 117 kg with rider (all values are estimates)",
+    ax.text(0.0, 7.05, "StepGen: energy and control flow at a 20 km/h cruise, flat road, 118 kg with rider (all values are estimates)",
             fontsize=10, fontweight="bold", color=INK, va="top")
     ax.text(0.0, 6.72, "CONCEPT, NOT FOR FABRICATION", fontsize=6.5, color="#B45309", va="top")
 
@@ -136,7 +136,7 @@ if __name__ == "__main__":
                      "250 W rear hub motor, assist cut at 25 km/h (decided)",
                      "About 9.1 Wh/km at 20 km/h; about 45 km per SwapCell, flat (SGN-CAL-001)",
                      "Belt top 240 mm above ground; 20 in wheels; 2.35 x 0.61 m",
-                     "About 34 kg without pack; parts about $713, pack excluded"],
+                     "About 35 kg without pack; parts about $546 (salvage build), pack excluded"],
         scale_figure=False, context=[rider()], cut=False, flow=None,
     )
     # Cutaway of the belt deck: section on the vehicle centre line, seen from the left, low camera

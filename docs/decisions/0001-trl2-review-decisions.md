@@ -3,7 +3,7 @@ doc_id: SGN-DDR-001
 title: StepGen TRL 2 review decisions
 project: StepGen
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -13,12 +13,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Record Amish's 2026-09-25 decisions on the TRL 2 review, the move to SwapCell interface v0.3 and the items that stay open
+- version: "0.2"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002)
 ---
 
 # 0001: TRL 2 review decisions
 
 - **Date:** 2026-09-25
-- **Status:** accepted (items 1 to 12); items 13 to 15 remain proposed, awaiting Amish
+- **Status:** accepted (items 1 to 12); item 15 decided by Amish, 2026-09-25: go with recommendation (see SGN-DDR-002); items 13 and 14 remain proposed, awaiting Amish
 
 ## Context
 
@@ -53,15 +57,15 @@ The options for each item are in `docs/REVIEW.md` (TRL 2 session) and SGN-PRC-00
 
 ### Items that remain open
 
-These items had no recommendation to accept, or arose at TRL 3, and stay **Proposed, awaiting Amish**:
+Items 13 and 14 had no recommendation to accept and stay **Proposed, awaiting Amish**. Item 15 arose at TRL 3 and is now decided (SGN-DDR-002):
 
 - **13. First user group.** Non-cycling adults, older adults or commuters. No preference was stated, and the partner is left open by item 11.
 - **14. First target country** for the legal classification (item 8 decides the route, not the country).
-- **15. New TRL 3 items** from SGN-CAL-001, each with options and a recommendation in `docs/REVIEW.md` (session 2026-09-25: TRL 3): the cost overrun against the new $650 budget, belt length for tall riders, deck rail size for weld fatigue, and a key switch in the INTERLOCK loop.
+- **15. New TRL 3 items** from SGN-CAL-001: the cost overrun against the new $650 budget, belt length for tall riders, deck rail size for weld fatigue, and a key switch in the INTERLOCK loop. **Decided by Amish, 2026-09-25: go with recommendation.** Salvage reference build within $650, belt kept at 1.05 m until co-design, 60 x 30 x 2 mm deck rails, key switch in series with the coding resistor. Recorded in SGN-DDR-002.
 
 ## Consequences
 
 - SGN-PRB-001, SGN-PRC-001 and SGN-REQ-001 move to version 0.4 (they were already at 0.3 from the 2026-09-25 concept change) and no longer mark items 1 to 12 as proposed.
-- R12 now reads $650. The priced BOM is about $713, so R12 is **not met** (SGN-CAL-001); options are in the review note.
+- R12 now reads $650. The priced BOM is about $713, so R12 is **not met** (SGN-CAL-001); options are in the review note. Update: under SGN-DDR-002 the salvage route became the reference build ($546), so R12 is now met on paper.
 - R11 now cites SwapCell interface v0.3, and a new requirement R13 covers pack retention to latch class V1.
 - TRL 3 is the hard stop. TRL 4 (a test article, lab tests and a build log) is on hold by Amish's instruction.

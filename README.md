@@ -2,13 +2,53 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
-**Area:** Mobility and Logistics · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** $650 USD, SwapCell pack excluded · **Difficulty:** 3 of 5
+**Area:** Mobility and Logistics · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** $650 USD on the salvage reference build, SwapCell pack excluded · **Difficulty:** 3 of 5
 
 Walking-treadmill vehicle: the rider stands upright and walks at a normal pace on a short free-running belt between the wheels, a belt-speed sensor sets the assist of a 250 W hub motor, and the vehicle moves at e-bike speed (up to 25 km/h) on a shared SwapCell pack. Walking is the control input; the motor does the work.
 
 ![StepGen concept: a rider walking upright on the belt deck between two 20 in wheels](media/hero.png)
 
 [Interactive 3D model](media/viewer.html) · [General arrangement (PDF)](cad/drawings/SGN-DWG-001.pdf) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
+
+## Concept rationale
+
+Walking is the one way of moving that almost everyone already knows, so StepGen uses it as the control input instead of asking new riders to learn to pedal and balance on a saddle. The rider walks at an ordinary pace on a free-running belt; a sensor reads that pace and a 250 W hub motor does the propulsion, because a person walking puts only about 30 to 41 W into the belt, far less than the 136 W the vehicle needs at 20 km/h ([SGN-CAL-001](docs/04-calcs/01-sizing.md)). Walking sets the speed, gives light exercise and stops the motor as soon as the rider stops.
+
+Commercial walking bikes exist but cost about €3,000 and weigh about 55 kg ([Lopifit](https://www.lopifit.com/what-is-a-lopifit/)). StepGen is open hardware so that a local welder or bike mechanic can build it from a salvaged walking-pad treadmill, a donor 20 in bike and common e-bike parts for about $546, share one SwapCell pack with other portfolio vehicles, and adapt the design to the riders they serve.
+
+## Burning platform
+
+The WHO reports that 31 % of adults worldwide did not meet the recommended levels of physical activity in 2022, a share that has risen since 2010 ([WHO, physical activity fact sheet](https://www.who.int/news-room/fact-sheets/detail/physical-activity)). At the same time, populations are ageing: by 2030 one in six people in the world will be aged 60 or over, 1.4 billion people, and by 2050 two-thirds of them will live in low- and middle-income countries ([WHO, ageing and health fact sheet](https://www.who.int/news-room/fact-sheets/detail/ageing-and-health)).
+
+Many of these people make short daily trips that are too long to walk and too costly by car, and e-bikes serve them only if they can already cycle. A vehicle driven by ordinary walking could give non-cyclists and older adults the reach of an e-bike together with daily activity, but only if it is cheap and simple enough to be built and repaired locally.
+
+## Where it could be used
+
+### By industry
+
+| Industry | Use |
+| --- | --- |
+| Urban mobility and bike share | A pedal-free option in shared fleets for riders who do not cycle |
+| Healthy ageing and community services | Errands and clinic visits for older adults who can walk but are nervous on a saddle |
+| Workplace and campus mobility | Moving staff across large sites, factories, hospitals and universities at walking effort |
+| Tourism and leisure | Rentals on promenades and park paths, where riding a walking bike is itself the attraction |
+| Last-mile commuting | The trip between home and a train or bus station for commuters who want light exercise |
+| Local fabrication and repair | A product that bike mechanics and welders can build and service from salvaged parts |
+
+### By country or region
+
+| Country or region | Why it matters there |
+| --- | --- |
+| Netherlands | Walking bikes are already on the road; electric walking bikes may use the pavement only up to 6 km/h and otherwise ride on the cycle path ([Scouters.nl](https://www.scouters.nl/hulpmiddel-keuze/loopfiets-volwassenen/)), which gives a working reference for rules and infrastructure |
+| Japan | 29.1 % of the population was aged 65 or over on 1 October 2023 ([Cabinet Office, Annual Report on the Ageing Society 2024](https://www8.cao.go.jp/kourei/english/annualreport/2024/pdf/2024.pdf)); an upright, walking-paced vehicle suits older adults on short local trips |
+| United States | Federal e-bike law assumes operable pedals ([15 USC 2085](https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title15-section2085&num=0&edition=prelim)), so a walking vehicle is a test case for how rules treat pedal-free, low-power assist |
+| India | Dense towns with many short trips and a strong local bicycle-parts and repair trade; a design built from common bike parts and salvaged treadmills keeps the price within reach |
+| East Africa (for example Kenya) | A lower-income market where cost decides adoption; a locally built vehicle that shares one SwapCell pack with other household uses spreads the battery cost; demand and rules need a desk study |
+| Latin America (for example Brazil) | Growing cities with cycle-lane networks and informal repair trades that could build and maintain a steel-frame vehicle |
+
+## What sparked the idea
+
+The starting point was the electric walking bike that Amish has seen in the Netherlands, of the Lopifit type: the rider walks upright on a treadmill belt between the wheels, and the bike moves forward instead of being pedalled. The Lopifit was invented in Utrecht by Bruin Bergmeester, who wanted to stop driving to work ([Lopifit](https://www.lopifit.com/what-is-a-lopifit/)). It shows that a walking vehicle works and can be sold, but its price and mass put it out of reach of many of the people who would gain most from it. StepGen asks whether the same idea can be made light, open and garage-buildable on a shared battery.
 
 ## Problem
 
@@ -22,15 +62,15 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
 ## Key components
 
-- Long-wheelbase steel frame (2.35 m long, 1.86 m wheelbase) with two 20 in wheels
+- Long-wheelbase steel frame (2.35 m long, 1.86 m wheelbase, 60 x 30 x 2 mm deck rails) with two 20 in wheels
 - Free-running treadmill belt on a roller bed, with an anti-reverse clutch
 - Belt-speed sensor that sets the motor assist
 - 250 W geared rear hub motor and 48 V controller, assist cut at 25 km/h, 15 km/h beginner mode
 - Shared 48 V SwapCell pack (interface v0.3) in a down-tube cradle to latch class V1, woken by a 10 kΩ INTERLOCK coding resistor (pack not in the parts cost)
-- Two disc brakes with motor cut-off levers and a lanyard stop switch
+- Two disc brakes with motor cut-off levers, a lanyard stop switch and a key switch in the SwapCell INTERLOCK loop
 - Guards over the belt rollers and the rear tire
 
-TRL 3 sizing ([SGN-CAL-001](docs/04-calcs/01-sizing.md)): about 9.1 Wh/km at 20 km/h, about 45 km per SwapCell pack on the flat, 34.0 kg without the pack, and $713 in parts excluding the pack, over the $650 budget (see the [review note](docs/REVIEW.md)). The parametric model is `cad/src/model.py`, with STEP files in `cad/step/`.
+TRL 3 sizing ([SGN-CAL-001](docs/04-calcs/01-sizing.md)): about 9.1 Wh/km at 20 km/h, about 45 km per SwapCell pack on the flat, 35.0 kg without the pack, and $546 in parts excluding the pack on the salvage reference build, inside the $650 budget ($721 with all new parts; see [SGN-DDR-002](docs/decisions/0002-recommendations-accepted.md) and the [review note](docs/REVIEW.md)). The parametric model is `cad/src/model.py`, with STEP files in `cad/step/`.
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv).
 
@@ -61,4 +101,4 @@ Controlled documents follow the portfolio [documentation standard](.kit/STANDARD
 - **Hardware** (CAD, drawings, BOM, electronics): [CERN-OHL-S v2](LICENSE)
 - **Software** (firmware, scripts, notebooks): [MIT](LICENSE-SOFTWARE)
 
-Part of the open hardware portfolio at [amishchadha.com](https://amishchadha.com).
+A project of the [Design Molecule](https://designmolecule.com) lab.

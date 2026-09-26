@@ -78,11 +78,12 @@ def kg(area_mm2, length_mm, rho=ST):
 
 
 rail_len = P["rail_x1"] - P["rail_x0"]
+RH, RW, RT = P["rail_h"], P["rail_w"], P["rail_t"]   # deck rail section (SGN-DDR-002: 60 x 30 x 2)
 lower_stay = math.dist((P["rail_x0"], P["rail_y"], G["roll_z"] - 15), (0, 70, P["wheel_r"]))
 upper_stay = math.dist((P["rail_x0"] + 180, P["rail_y"], G["roll_z"] + 5), (0, 70, P["wheel_r"] + 10))
 nose_len = math.dist((P["rail_x1"], P["rail_y"], G["roll_z"] - 15), (G["dt_lo"][0], 40, G["dt_lo"][1]))
 frame_items = [
-    ("deck rails 50x25x2 RHS", kg(rhs(50, 25, 2), 2 * rail_len)),
+    (f"deck rails {RH:.0f}x{RW:.0f}x{RT:.0f} RHS", kg(rhs(RH, RW, RT), 2 * rail_len)),
     ("cross members 25x25x2 RHS", kg(rhs(25, 25, 2), 3 * 2 * P["rail_y"])),
     ("rear stays 22x1.6", kg(chs(22, 1.6), 2 * lower_stay + 2 * upper_stay)),
     ("nose tubes 28x1.6 and block", kg(chs(28, 1.6), 2 * nose_len) + 0.40),
@@ -281,8 +282,8 @@ for kmh in (15, 25):
 # deck rail bending, simply supported, point load at mid span, two rails share
 E, FY = 200e3, 235.0
 Lr = rail_len
-I_r = (25 * 50 ** 3 - 21 * 46 ** 3) / 12
-Z_r = I_r / 25
+I_r = (RW * RH ** 3 - (RW - 2 * RT) * (RH - 2 * RT) ** 3) / 12
+Z_r = I_r / (RH / 2)
 P_des = RIDER_MAX * g * 2.5 / 2
 M_des = P_des * Lr / 4
 s_des = M_des / Z_r
@@ -291,13 +292,13 @@ P_step = RIDER * g * 1.2 / 2
 s_step = P_step * Lr / 4 / Z_r
 cycles = 1.9 * 3600 * 365 * 5
 fat_lim = 0.737 * 71 / 1.35
-print(f"deck rail 50x25x2: I {I_r:.0f} mm4, Z {Z_r:.0f} mm3; design load {RIDER_MAX:.0f} kg x 2.5 g: "
+print(f"deck rail {RH:.0f}x{RW:.0f}x{RT:.0f}: I {I_r:.0f} mm4, Z {Z_r:.0f} mm3; design load {RIDER_MAX:.0f} kg x 2.5 g: "
       f"{s_des:.0f} MPa (factor {FY / s_des:.1f} on {FY:.0f} MPa), deflection {d_des:.1f} mm")
 print(f"  walking stress range {s_step:.1f} MPa for about {cycles / 1e6:.1f} million steps in 5 years (1 h a day); "
       f"FAT 71 weld limit with gamma 1.35: {fat_lim:.1f} MPa")
-I_60 = (30 * 60 ** 3 - 26 * 56 ** 3) / 12
-print(f"  option 60x30x2 rails: walking stress range {P_step * Lr / 4 / (I_60 / 30):.1f} MPa, "
-      f"mass +{kg(rhs(60, 30, 2) - rhs(50, 25, 2), 2 * Lr):.2f} kg")
+I_50 = (25 * 50 ** 3 - 21 * 46 ** 3) / 12
+print(f"  previous 50x25x2 rails (TRL 3 v0.1): walking stress range {P_step * Lr / 4 / (I_50 / 25):.1f} MPa; "
+      f"change to {RH:.0f}x{RW:.0f}x{RT:.0f} adds {kg(rhs(RH, RW, RT) - rhs(50, 25, 2), 2 * Lr):.2f} kg")
 F_bar = 500.0
 arm = P["bar_z"] - G["head_top"][1]
 for d, t in ((32, 2), (38, 2)):
@@ -338,7 +339,9 @@ print(f"StepGen parts total (pack excluded) ${tot:.0f} against budget ${budget:.
       f"{'over' if tot > budget else 'under'} by ${abs(tot - budget):.0f} ({abs(tot - budget) / budget * 100:.0f} %)")
 cost = {r["Item"].split()[0]: float(r["unit_cost_usd"]) for r in bom}
 salv = tot - (cost["2"] + cost["3"] - 40) - (cost["7"] + cost["9"] - 50)
-print(f"salvage route (walking-pad treadmill for items 2 and 3 at $40, donor 20 in bike for items 7 and 9 at $50): ${salv:.0f}")
+print(f"reference build, salvage route (walking-pad treadmill for items 2 and 3 at $40, donor 20 in bike for items 7 and 9 at $50): "
+      f"${salv:.0f} against budget ${budget:.0f}: {'over' if salv > budget else 'under'} by ${abs(salv - budget):.0f}")
+print(f"all-new-parts fallback ${tot:.0f} (reported, not held to the budget; SGN-DDR-002)")
 
 # ---------------------------------------------------------------- results
 hdr("Results by requirement")
@@ -362,8 +365,8 @@ res("R10", f"{G['length'] / 1000:.2f} m long, {G['width'] / 1000:.2f} m wide, {v
     f"({40 - veh_pack:.1f} kg margin, less than a 10 % growth allowance)", "2.4 m, 0.65 m, 40 kg", "At risk")
 res("R11", f"Interface v0.3: 10 kOhm coded INTERLOCK (node 0.30 V), vehicle heartbeat mode 2; {i_max / V_MIN:.1f} A maximum; below 60 V",
     "SwapCell v0.3 unchanged; 15 A or less; below 60 V DC", "Met (on paper)")
-res("R12", f"${tot:.0f} excluding the pack; salvage route about ${salv:.0f}", f"${budget:.0f} excluding the pack",
-    "Not met" if tot > budget else "Met")
+res("R12", f"Reference (salvage) build ${salv:.0f} excluding the pack; all-new-parts fallback ${tot:.0f}",
+    f"${budget:.0f} excluding the pack on the reference build", "Not met" if salv > budget else "Met (on paper)")
 res("R13", f"Class V1 receiver specified: preload {1.2 * f_sine:.0f} N, lever ratio {1.2 * f_sine / 50:.1f}, bolts factor "
     f"{0.6 * 800 / (f_shock / (2 * A_M6)):.0f} at 25 g", "SwapCell latch class V1, no release or contact break",
     "Not verifiable at TRL 3")

@@ -1,5 +1,45 @@
 # Review note: StepGen
 
+## Session 2026-09-25: recommendations accepted
+
+On 2026-09-25 Amish wrote: "i accept all your recommendations, go with them across all repos." Every open item with a recommendation is now **Decided by Amish, 2026-09-25: go with recommendation**, recorded in `docs/decisions/0002-recommendations-accepted.md` (SGN-DDR-002 v0.1). TRL stays at 3 (`trl: 3`, `trl_target: 3`).
+
+### Decisions applied and what changed
+
+| # | Decision | Before | After |
+| --- | --- | --- | --- |
+| 1 | Cost (R12): keep $650, salvage route is the reference build, new parts the fallback | R12 not met, $713 all new | R12 met on paper, $546 reference build; $721 all new (reported, not held to R12). `budget_usd` unchanged at $650; R12 text restated |
+| 2 | Belt length: keep 1.05 m pitch and 2.35 m length until co-design | R1 at risk | No geometry change; R1 still at risk, held until co-design |
+| 3 | Deck rails 50 x 25 x 2 mm to 60 x 30 x 2 mm | Weld stress range 37.6 MPa (limit 38.8); static factor 2.0; frame 11.4 kg; vehicle 34.0 kg, 36.8 kg with pack; hill 233 W; BOM item 1 $75 | 25.5 MPa; factor 3.0; frame 12.5 kg; vehicle 35.0 kg, 37.9 kg with pack (R10 margin 3.2 to 2.1 kg); hill 235 W (R6 margin 7 to 6 %); item 1 $83 |
+| 4 | Key switch in series with the 10 kΩ INTERLOCK coding resistor, standstill use only | Proposed (already modelled and priced) | Decided; wording updated |
+| 5 | Raise the legacy-to-heartbeat question with SwapCell | Flag | Cross-repo action (below) |
+
+Files changed: `cad/src/model.py` (rail parameters), STEP and STL re-exported; `cad/src/sheets.py` and SGN-DWG-001 at **Rev P2** (rails and mass notes); `cad/src/concept_media.py` (key figures) and all media regenerated and checked by eye; `docs/04-calcs/sizing.py` (rail section from the model, R12 on the reference build), `results.csv` and SGN-CAL-001 v0.2; `bom/bom.csv` item 1 and `bom/bom-notes.md`; SGN-PRB-001, SGN-PRC-001 and SGN-REQ-001 at v0.5; SGN-DDR-001 v0.2 (item 15 decided); `project.yaml` (DDR-002 in `trl_evidence`); `README.md` (numbers, key components, and new sections Concept rationale, Burning platform, Where it could be used, What sparked the idea); all PDFs re-rendered and every generated file re-rendered with the designmolecule.com footer.
+
+### Requirement status (SGN-CAL-001 v0.2)
+
+- **Not met:** none.
+- **At risk:** R1 (1.00 m belt fits a 1.75 m rider only up to 5 km/h; kept until co-design), R6 (235 W for 8 % at 8 km/h, 6 % margin), R10 (37.9 kg with pack, 2.1 kg margin).
+- **Not verifiable at TRL 3:** R9 (guard gaps to ISO 13857), R13 (latch class V1 retention).
+- **Met on paper:** R2, R3, R4, R5 (45 km), R7, R8, R11, R12 ($546 reference build).
+
+### Still Proposed, awaiting Amish (no recommendation)
+
+- First user group (non-cycling adults, older adults or commuters).
+- First target country for the legal category.
+
+### Cross-repo actions
+
+- **SwapCell:** v0.3 does not say whether a pack in legacy discharge moves to mode 2 when a heartbeat arrives; StepGen's logic board, powered from the pack after a key-on wake, needs that. Not edited from this repo.
+
+### Safety
+
+Unchanged from the TRL 3 session, except that the deck-rail weld fatigue concern is closed on paper (still needs a test). R12 now depends on salvaged treadmill and bike parts, whose condition must be checked before use. The key switch cuts the pack without warn-then-derate and is for use at a standstill only.
+
+### TRL 4
+
+TRL 4 remains on hold by Amish's instruction. No test article, test plan, build log, PCB or firmware was created.
+
 ## Session 2026-09-25: TRL 3
 
 TRL 3 (analytical proof of concept on paper) is reached and is the hard stop. TRL 4 is on hold by Amish's instruction ("Make sure we don't proceed to TRL 4 on any of them"). The design meets its range, speed, braking, step-off, power and SwapCell interface requirements on paper, but **R12 (cost) is not met** at $713 against the new $650 budget, and R1, R6 and R10 are at risk.
@@ -43,13 +83,15 @@ Decided by Amish, 2026-09-25, go with recommendation: two-wheel long-wheelbase f
 
 ### Proposed, awaiting Amish
 
-1. **First user group.** Non-cycling adults, older adults or commuters. No recommendation.
-2. **First target country** for the legal category. No recommendation.
-3. **Cost overrun (R12).** Options: (a) keep $650 and make the salvage route (used walking-pad treadmill, donor 20 in bike; about $538) the reference build, with new parts as fallback; (b) raise `budget_usd` to about $720 for new parts; (c) cut scope (for example drop the display for a simple LED). Recommended: (a). `project.yaml` stays at $650.
-4. **Belt length (R1 against R10).** Options: (a) keep the 1.05 m roller pitch and 2.35 m length until co-design shows the riders' heights and pace; (b) lengthen to about 1.19 m, which fits a 1.90 m rider at 6 km/h but makes the vehicle about 2.49 m and needs R10 relaxed to 2.5 m; (c) cap belt speed in firmware for the short belt. Recommended: (a), revisit after co-design.
-5. **Deck rails.** Change from 50 x 25 x 2 mm to 60 x 30 x 2 mm to take the weld stress range from 37.6 to 25.5 MPa, for 1.08 kg (mass then about 37.9 kg with pack). Recommended. Not applied to the model, because it uses a third of the R10 mass margin.
-6. **Key switch in the INTERLOCK loop.** Options: (a) a key switch in series with the 10 kΩ coding resistor (off opens the loop and sleeps the pack; on wakes it; also a simple immobiliser); (b) a soft power button that sends a sleep request, with the pack's own wake button to start. Recommended: (a), used at a standstill only.
-7. **Flag to the SwapCell project (not a StepGen decision).** v0.3 does not say whether a pack in legacy discharge moves to mode 2 when a heartbeat arrives, which a host powered from the pack output needs after a key-on wake.
+*Update 2026-09-25: items 3 to 7 are now "Decided by Amish, 2026-09-25: go with recommendation" (SGN-DDR-002); items 1 and 2 stay Proposed, awaiting Amish.*
+
+1. **First user group.** Non-cycling adults, older adults or commuters. No recommendation. Still Proposed, awaiting Amish.
+2. **First target country** for the legal category. No recommendation. Still Proposed, awaiting Amish.
+3. **Cost overrun (R12).** Options: (a) keep $650 and make the salvage route (used walking-pad treadmill, donor 20 in bike; about $538) the reference build, with new parts as fallback; (b) raise `budget_usd` to about $720 for new parts; (c) cut scope (for example drop the display for a simple LED). Recommended: (a). `project.yaml` stays at $650. **Decided by Amish, 2026-09-25: go with recommendation.**
+4. **Belt length (R1 against R10).** Options: (a) keep the 1.05 m roller pitch and 2.35 m length until co-design shows the riders' heights and pace; (b) lengthen to about 1.19 m, which fits a 1.90 m rider at 6 km/h but makes the vehicle about 2.49 m and needs R10 relaxed to 2.5 m; (c) cap belt speed in firmware for the short belt. Recommended: (a), revisit after co-design. **Decided by Amish, 2026-09-25: go with recommendation.**
+5. **Deck rails.** Change from 50 x 25 x 2 mm to 60 x 30 x 2 mm to take the weld stress range from 37.6 to 25.5 MPa, for 1.08 kg (mass then about 37.9 kg with pack). Recommended. Not applied to the model, because it uses a third of the R10 mass margin. **Decided by Amish, 2026-09-25: go with recommendation;** now applied.
+6. **Key switch in the INTERLOCK loop.** Options: (a) a key switch in series with the 10 kΩ coding resistor (off opens the loop and sleeps the pack; on wakes it; also a simple immobiliser); (b) a soft power button that sends a sleep request, with the pack's own wake button to start. Recommended: (a), used at a standstill only. **Decided by Amish, 2026-09-25: go with recommendation.**
+7. **Flag to the SwapCell project (not a StepGen decision).** v0.3 does not say whether a pack in legacy discharge moves to mode 2 when a heartbeat arrives, which a host powered from the pack output needs after a key-on wake. **Decided by Amish, 2026-09-25: go with recommendation** (raise with SwapCell; cross-repo action).
 
 ### Safety concerns
 
@@ -121,6 +163,8 @@ Requirements not met or at risk:
 - **R11** depends on SwapCell choices that are still open (connector family, latch vibration rating, CAN bit layout).
 
 ### Proposed, awaiting Amish
+
+*Update 2026-09-25: items 1 to 8 were decided by Amish on 2026-09-25 (go with recommendation, SGN-DDR-001); item 9 (first user group) stays Proposed, awaiting Amish.*
 
 1. **Form factor.** Recommended: two-wheel, long-wheelbase, bike type (about 2.35 m, like the Lopifit), because a natural stride needs about 1.0 m of belt. Alternatives: a compact scooter type (short belt, shuffling steps, small wheels) or a three-wheel tadpole (stable at rest for non-cyclists, but wider and heavier). Keep the three-wheel option open until co-design.
 2. **Wheels.** Recommended: 20 in front and rear. Alternatives: 28 in front with 20 in rear (Lopifit layout) or 16 in all round.

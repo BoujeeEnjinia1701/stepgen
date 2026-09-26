@@ -3,7 +3,7 @@ doc_id: SGN-PRB-001
 title: StepGen problem statement
 project: StepGen
 doc_type: Problem statement
-version: "0.4"
+version: "0.5"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -25,13 +25,17 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: TRL 3. Record Amish's decisions (SGN-DDR-001) on budget, legal route and co-design partners; SwapCell interface v0.3; numbers checked against SGN-CAL-001
+- version: "0.5"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002)
 ---
 
 # StepGen problem statement
 
 Many people who would benefit from an electric bike never use one because riding needs cycling skill, confidence on pedals and a seated posture that does not suit everyone. Walking is the one way of moving that almost everyone already knows. StepGen asks whether a small electric vehicle can be driven by walking: the rider stands upright on a short treadmill belt between the wheels, walks at an ordinary pace, and the vehicle moves forward at e-bike speed.
 
-> **Concept change.** Amish decided on 2026-09-24 that StepGen is a walking-treadmill vehicle in the manner of the Dutch Lopifit walking bike, not a stationary stepper generator. The earlier generator concept, which charged a PowerBox, is dropped entirely. Version 0.2 of this document describes the earlier concept and remains in Git history. On 2026-09-25 Amish accepted the TRL 2 recommendations, including a $650 budget, the route for the legal question and the move to SwapCell interface v0.3 (SGN-DDR-001).
+> **Concept change.** Amish decided on 2026-09-24 that StepGen is a walking-treadmill vehicle in the manner of the Dutch Lopifit walking bike, not a stationary stepper generator. The earlier generator concept, which charged a PowerBox, is dropped entirely. Version 0.2 of this document describes the earlier concept and remains in Git history. On 2026-09-25 Amish accepted the TRL 2 recommendations, including a $650 budget, the route for the legal question and the move to SwapCell interface v0.3 (SGN-DDR-001). The same day he accepted the TRL 3 recommendations, including a salvage reference build that keeps the $650 budget (SGN-DDR-002).
 
 ## The problem
 
@@ -62,7 +66,7 @@ StepGen is framed around that fact. The belt tells the vehicle that the rider is
 
 ## Constraints
 
-- Garage-buildable prototype with a budget of $650 USD in `project.yaml` (decided by Amish, 2026-09-25), excluding the SwapCell pack, which is priced once in the SwapCell project. The priced BOM is about $713, over this figure (see SGN-CAL-001).
+- Garage-buildable prototype with a budget of $650 USD in `project.yaml` (decided by Amish, 2026-09-25), excluding the SwapCell pack, which is priced once in the SwapCell project. Amish decided on 2026-09-25 (SGN-DDR-002) that the reference build uses a salvaged walking-pad treadmill and a donor 20 in bike, which prices at about $546; an all-new build (about $721) is the fallback (see SGN-CAL-001).
 - Uses the shared SwapCell pack (interface v0.3: 13S lithium-ion, about 46.8 V nominal, 39.0 to 54.6 V, about 468 Wh, 2.85 kg), with a 10 kΩ coding resistor in the INTERLOCK loop for wake and a vehicle receiver to latch class V1. StepGen must not change the interface locally; conflicts go back to the SwapCell project.
 - Legal in intent: stay inside pedelec-like limits (250 W rated motor, assist cut before 25 km/h, motor only while the rider walks) so the vehicle can be argued to be as safe and as limited as an e-bike. Whether it legally counts as one is an open question (see below).
 - Safe for untrained riders: no reachable pinch points, motor cut-off when the rider stops walking, lets go of a lanyard or pulls a brake.
