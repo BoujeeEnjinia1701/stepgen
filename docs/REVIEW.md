@@ -1,5 +1,20 @@
 # Review note: StepGen
 
+## Session 2026-09-26: sources strengthened
+
+Amish asked on 2026-09-26 to fix the weaker sources in the README. Every link below was fetched and checked against the claim. No controlled document changed; TRL stays at 3.
+
+| README location | Old source | New source |
+| --- | --- | --- |
+| Concept rationale (Lopifit price and mass) | Lopifit, "What is a Lopifit?" | Kept (manufacturer's own page; states from €2,999 and 55 kg gross) |
+| Countries: Netherlands | Scouters.nl (retailer guidance on 6 km/h pavement rule) | Government of the Netherlands, bicycle policy (27 % of journeys by bicycle; over half of car trips under 7.5 km) and Lopifit; the pavement-rule claim was dropped from the README |
+| Countries: India | None | IEA, Global EV Outlook 2024 (second-largest electric two-wheeler market, sales up 40 % in 2023, over 15 % cheaper than petrol after subsidies) |
+| Countries: East Africa (for example Kenya) | None | Row narrowed to Kenya; UNEP electric two and three wheelers programme page |
+| Countries: Latin America (for example Brazil) | None | Row rewritten as Latin America; IEA, Global EV Outlook 2024 (role of two- and three-wheelers in daily transport). An IBGE census source for Brazil could not be fetched, so Brazil-specific claims were removed |
+| What sparked the idea | Lopifit, "What is a Lopifit?" | Strengthened: same page plus Lopifit, "Our story"; wording now matches the source (Dutch invention by Bruin Bergmeester; company based in Utrecht) |
+
+Open: `docs/01-problem.md` still cites Scouters.nl for the Dutch 6 km/h pavement rule and Wikipedia, Redtail, New Atlas and SolidSmack elsewhere. No primary source for the Dutch rule was verified this session; replacing these is left for the next problem-statement revision.
+
 ## Session 2026-09-25: recommendations accepted
 
 On 2026-09-25 Amish wrote: "i accept all your recommendations, go with them across all repos." Every open item with a recommendation is now **Decided by Amish, 2026-09-25: go with recommendation**, recorded in `docs/decisions/0002-recommendations-accepted.md` (SGN-DDR-002 v0.1). TRL stays at 3 (`trl: 3`, `trl_target: 3`).
