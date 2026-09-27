@@ -6,9 +6,9 @@
 
 Walking-treadmill vehicle: the rider stands upright and walks at a normal pace on a short free-running belt between the wheels, a belt-speed sensor sets the assist of a 250 W hub motor, and the vehicle moves at e-bike speed (up to 25 km/h) on a shared SwapCell pack. Walking is the control input; the motor does the work.
 
-![StepGen concept: a rider walking upright on the belt deck between two 20 in wheels](media/hero.png)
+![StepGen: walking-treadmill e-bike with a 250 W hub motor, product render](media/render-hero.png)
 
-[Interactive 3D model](media/viewer.html) · [General arrangement (PDF)](cad/drawings/SGN-DWG-001.pdf) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
+[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [General arrangement (PDF)](cad/drawings/SGN-DWG-001.pdf) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 

@@ -1,5 +1,39 @@
 # Review note: StepGen
 
+## Session 2026-09-26: product appearance model and photoreal renders
+
+Amish chose this repo for the first batch of product renders on 2026-09-26. This session adds an appearance model for photoreal renders; the render images themselves (`media/render-hero.png`, `media/render-exploded.png` and a detail view) are produced later by the portfolio render run.
+
+### What was done
+
+- `cad/src/product_model.py`: `product_parts()` returns 96 parts (67 shell, 21 internal, 7 accessory, 1 context), each with a colour, a material class, its BOM line and an explode offset, plus `TITLE` and three `RENDER_VIEWS` (hero with the rider, exploded, and a detail view without the rider). Geometry reuses `PARAMS` and `geometry()` from `cad/src/model.py`; every main dimension and interface is unchanged.
+- Appearance detail added:
+  - Painted steel frame with rounded rectangular deck rails, a teal pinstripe, a "STEPGEN" wordmark and a "250 W 25 km/h" decal on the rail sides; headset cups; the kickstand stowed as in model.py.
+  - Belt with a fine tread texture; crowned end rollers with axle nuts; the 14 idler rollers on their aluminium angle carriers.
+  - Light grey guards (rear fender, heel guard with a rear reflector, roller covers, toe guard with a teal accent) and side boards with ribbed rubber foot pads and screws.
+  - 20 in wheels with treaded tires, rims, 28 laced spokes, valves and drilled 160 mm rotors on spider carriers; calipers.
+  - Hub motor with a painted shell, aluminium side covers, a bolt circle, a teal band, axle nuts, torque arms and its cable.
+  - Anti-reverse clutch housing with a teal drag knob; belt-speed sensor with a clear cap over the 8-magnet ring and a lit pulse light.
+  - Controller in a finned case with a clear side window over the walking logic board, ESP32 module and a lit status light; cable glands; the wiring harness with a sealed 20 A fuse holder and cable ties.
+  - SwapCell pack (interface v0.3) in the SwapCell visual language: grey tray, light lid, lit charge bar, interface label and ribbed carry handle; class V1 cradle with the teal over-centre lever, pivot and tube clamps.
+  - Handlebar with ribbed grips and teal bar-end plugs, brake levers with cut-off switch bodies, display with a lit readout, level selector with a lit ready light, key switch and a red magnetic lanyard stop with a coiled cord.
+- Context: the shared clay mannequin (`.kit/context_parts.py`, 1.75 m) standing on the belt with its pelvis over `rider_x` (950 mm), in a walking stride, with both hands on the grips (arm angles solved to the grip points).
+- `README.md`: hero image now points to `media/render-hero.png`, with an "Exploded render" link added to the links line.
+- Previews (matplotlib, clear parts left out) were checked for the hero, exploded and detail views.
+
+### Where the appearance model differs from model.py
+
+Each item is **Proposed, awaiting Amish**.
+
+1. **Rider pose.** The mannequin uses the "push" preset (hands closed on the grips) with walk-type leg angles and a shorter stride than the kit's walk preset: the preset stride put the leading toe on the toe guard, since the usable belt is 1.0 m. Recommendation: accept for renders; the rider's stride on a 1.0 m belt is worth checking in co-design, because a long stride may reach the toe guard.
+2. **Display tilt.** model.py tilts the display top 20 degrees toward the rider, so the screen face on the rider side points slightly downward, away from the rider's eyes. The appearance model keeps the model.py envelope and tilt. Recommendation: reverse the tilt in model.py at the next model update so the screen faces up toward the rider.
+3. **Wheel detail.** model.py draws 12 radial placeholder spokes; the appearance model shows 28 laced spokes, a tread and a spider carrier for each rotor (the rotors sit outboard of the hub in model.py). Recommendation: accept as appearance only; confirm the rotor carrier arrangement when the wheel build is specified.
+4. **Branding and markings.** The wordmark, rating decal, pinstripe and accent colours are appearance choices, not part of the BOM. Recommendation: accept, or give a preferred marking scheme.
+
+### TRL status
+
+This is an appearance model only, for renders: no tolerances, fabrication detail, PCB layout or build steps. `trl` stays 3 and TRL 4 remains on hold under the portfolio cap.
+
 ## Session 2026-09-26: sources strengthened
 
 Amish asked on 2026-09-26 to fix the weaker sources in the README. Every link below was fetched and checked against the claim. No controlled document changed; TRL stays at 3.
