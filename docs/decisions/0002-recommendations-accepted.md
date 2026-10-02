@@ -3,9 +3,9 @@ doc_id: SGN-DDR-002
 title: StepGen recommendations accepted
 project: StepGen
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,12 +13,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Record Amish's 2026-09-25 acceptance of the TRL 3 review recommendations, what changed in the repo and the items still open
+- version: "0.2"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Items 6 and 7 decided by Amish on 2026-10-02'
 ---
 
 # 0002: Recommendations accepted
 
 - **Date:** 2026-09-25
-- **Status:** accepted (items 1 to 5); items 6 and 7 remain proposed, awaiting Amish
+- **Status:** accepted (items 1 to 5); items 6 and 7 decided by Amish on 2026-10-02 ("i approve your recommendations for all 555 open decisions.")
 
 ## Context
 
@@ -42,10 +46,10 @@ The options for each item are in `docs/REVIEW.md` (TRL 3 session) and SGN-CAL-00
 
 ### Items that remain open
 
-These had no recommendation and stay **Proposed, awaiting Amish**:
+These had no recommendation and stayed **Proposed, awaiting Amish** until Amish decided them on 2026-10-02:
 
-- **6. First user group.** Non-cycling adults, older adults or commuters (SGN-DDR-001 item 13).
-- **7. First target country** for the legal category (SGN-DDR-001 item 14).
+- **6. First user group.** Non-cycling adults, older adults or commuters (SGN-DDR-001 item 13). **Decided by Amish, 2026-10-02:** non-cycling adults of working age who walk or take transit, with older adults as the second group once balance is understood.
+- **7. First target country** for the legal category (SGN-DDR-001 item 14). **Decided by Amish, 2026-10-02:** the Netherlands, confirming the category with the Dutch vehicle authority (RDW) before any road use.
 
 ## Consequences
 

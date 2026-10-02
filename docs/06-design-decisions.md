@@ -3,9 +3,9 @@ doc_id: SGN-DEC-001
 title: StepGen design decisions register
 project: StepGen
 doc_type: Design decisions register
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
     date: '2026-10-01'
     author: Amish Chadha
     change: Register opened; open decisions gathered from the review note, the decision records and the build plan work
+  - version: "0.2"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: 'Amish approved the recommendations for all seven open decisions (2026-10-02); SGN-DDR-003 accepted; moved to decisions made'
 ---
 
 # StepGen design decisions register
@@ -21,17 +25,7 @@ Every design decision still to be made, and every decision made, in one place. E
 
 ## Open decisions
 
-| # | Decision needed | Options | Recommendation | Affects in the build | Source |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Design for construction changes P1 to P17 | Accept as made; or ask for any change to be reworked | Accept: none changes what the vehicle does, its pitch or its safety case, and all 72 model checks pass | The whole build plan | SGN-DDR-003 |
-| 2 | First user group | Non-cycling adults, older adults or commuters | None yet | Bar height, belt length and beginner mode settings after co-design | SGN-DDR-001 item 13, SGN-DDR-002 item 6 |
-| 3 | First target country for the legal category | Any country with a co-design partner | None yet | Road use only; not part of the TRL 3 build | SGN-DDR-001 items 8 and 14, SGN-DDR-002 item 7 |
-| 4 | Rider pose in the photoreal renders | Accept the shorter stride used; or another pose | Accept for renders; check the stride on a 1.0 m belt in co-design | Renders only | `docs/REVIEW.md`, 2026-09-26, item 1 |
-| 5 | Wheel detail in the appearance model | Accept 28 laced spokes and rotor carriers as appearance only | Accept; the rotor positions now follow SGN-DDR-003 | Renders only | `docs/REVIEW.md`, 2026-09-26, item 3 |
-| 6 | Branding and markings on renders | Accept the wordmark, rating decal and accent colours; or give a scheme | Accept, or give a preferred scheme | Renders only | `docs/REVIEW.md`, 2026-09-26, item 4 |
-| 7 | Three-wheel version | Keep two wheels; build a three-wheel version for riders who cannot balance | Keep open until co-design shows whether non-cyclists can balance | Not in this build | SGN-DDR-001 item 1 |
-
-The SwapCell question of how a pack in legacy discharge moves to discharge mode when a heartbeat arrives (SGN-DDR-002 item 5) is a cross-repo action for the SwapCell project, not a StepGen decision. The display tilt (`docs/REVIEW.md`, 2026-09-26, item 2) is resolved in the model by SGN-DDR-003 P15.
+None. All open decisions were decided on 2026-10-02.
 
 ## To confirm when parts are bought
 
@@ -61,5 +55,12 @@ Value-engineering target: USD 650 (a hypothetical control target, not a limit). 
 | 2026-09-24 | StepGen becomes a walking-treadmill vehicle; the stationary stepper generator is dropped | Amish: "as the person walks his scooter / bike moves forward but hes upright walking instead of pedalling" | SGN-PRB-001, SGN-PRC-001 |
 | 2026-09-25 | TRL 2 review items: two-wheel long-wheelbase form, 20 in wheels, 250 W rear hub with a 25 km/h cut and 15 km/h beginner mode, 30 km range target, no roller generator, Mobility and Logistics area, USD 650 budget (pack excluded), legal route, SwapCell interface v0.3, shared-pack pricing, co-design partners later | Amish: "proceed with all of your recommendations across all batches. Make sure we don't proceed to TRL 4 on any of them." | SGN-DDR-001 |
 | 2026-09-25 | Salvage route as the reference build within USD 650; belt kept at 1.05 m until co-design; 60 x 30 x 2 mm deck rails; key switch in the INTERLOCK loop; raise the legacy-to-heartbeat question with SwapCell | Amish: "i accept all your recommendations, go with them across all repos." | SGN-DDR-002 |
-| 2026-09-30 | Make the design physically buildable while drawing the build plan; keep outstanding decisions out of the build plan, in this register | Amish: "If you are realising that the design cannot be built as per concept - fix the design assumptions to match and be physically feasible as you draw the illustrations." | SGN-DDR-003 (draft, open item 1) |
+| 2026-09-30 | Make the design physically buildable while drawing the build plan; keep outstanding decisions out of the build plan, in this register | Amish: "If you are realising that the design cannot be built as per concept - fix the design assumptions to match and be physically feasible as you draw the illustrations." | SGN-DDR-003 (accepted on 2026-10-02, below) |
 | 2026-10-01 | `budget_usd` is a value-engineering target, not a limit | Amish: "the budgets are a hypothethical control target to ensure we are thinking along a value engineering lens" | This register, Value engineering |
+| 2026-10-02 | Design for construction accepted: P1 to P17 and their knock-on changes, as made | Amish: "i approve your recommendations for all 555 open decisions." | SGN-DDR-003 |
+| 2026-10-02 | First user group: non-cycling adults of working age who walk or take transit, with older adults as the second group once balance is understood | Amish: "i approve your recommendations for all 555 open decisions." | SGN-DDR-001 item 13, SGN-DDR-002 item 6 |
+| 2026-10-02 | First target country for the legal category: the Netherlands, confirming the category with the Dutch vehicle authority (RDW) before any road use; the first country to approach, not a confirmed category | Amish: "i approve your recommendations for all 555 open decisions." | SGN-DDR-001 items 8 and 14, SGN-DDR-002 item 7 |
+| 2026-10-02 | Rider pose: the shorter stride is accepted for the renders, and stride length on the 1.0 m belt is added to the co-design checks | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 1 |
+| 2026-10-02 | Wheel detail: 28 laced spokes and rotor carriers accepted as appearance only; the rotor carriers are confirmed when the wheel build is specified | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 3 |
+| 2026-10-02 | Branding: the wordmark, pinstripe and accent colours are the reference scheme; the "250 W 25 km/h" rating decal is dropped from the renders until the legal category is confirmed | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 4 |
+| 2026-10-02 | Three-wheel version: keep two wheels for now and make balance a fixed co-design test: if most non-cyclists cannot ride at walking pace after a short trial, the three-wheel version is designed | Amish: "i approve your recommendations for all 555 open decisions." | SGN-DDR-001 item 1 |

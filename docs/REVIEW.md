@@ -1,5 +1,42 @@
 # Review note: StepGen
 
+## Session 2026-10-02: open decisions decided by Amish
+
+Authority: Amish, 2026-10-02: "i approve your recommendations for all 555 open decisions." The recommendations approved are those written for the open decisions in the design decisions register. No model, BOM quantity or price, or picture was changed; where a decision needs one, it is listed below as a follow-up. `trl` and `trl_target` stay at 3. No commit or push.
+
+### Decisions recorded
+
+7, all moved to "Decisions made" in `docs/06-design-decisions.md`, dated 2026-10-02:
+
+1. Design for construction (SGN-DDR-003) accepted: P1 to P17 as made.
+2. First user group: non-cycling adults of working age who walk or take transit; older adults second, once balance is understood.
+3. First target country: the Netherlands, with the legal category confirmed with the RDW before any road use.
+4. Rider pose: shorter stride accepted for the renders; stride length on the 1.0 m belt added to the co-design checks.
+5. Wheel detail: appearance only; rotor carriers confirmed when the wheel build is specified.
+6. Branding: wordmark, pinstripe and accent colours as the reference scheme; the "250 W 25 km/h" rating decal dropped from the renders until the legal category is confirmed.
+7. Three-wheel version: keep two wheels; balance becomes a fixed co-design test, and the three-wheel version is designed if most non-cyclists cannot ride at walking pace after a short trial.
+
+### Documents changed
+
+- `docs/06-design-decisions.md` (SGN-DEC-001 v0.2)
+- `docs/decisions/0003-design-for-construction.md` (SGN-DDR-003 v0.2): accepted; status stays Draft
+- `docs/decisions/0001-trl2-review-decisions.md` (SGN-DDR-001 v0.3): items 13 and 14 decided; balance test noted on item 1
+- `docs/decisions/0002-recommendations-accepted.md` (SGN-DDR-002 v0.2): items 6 and 7 decided
+- `docs/01-problem.md` (SGN-PRB-001 v0.6): user group, country, balance test, stride check
+- `docs/02-concept.md` (SGN-PRC-001 v0.7): country and RDW check; balance test
+- `docs/03-requirements.md` (SGN-REQ-001 v0.7): legal classification note
+- `docs/05-build-plan.md` (SGN-BLD-001 v0.2): safety stop S7 names the RDW check
+
+### Follow-up actions to carry approved decisions into the design
+
+1. Decision 5 (bom): Confirm the rotor carriers against the hub and front hub when the wheel build is specified (BOM lines for the wheels).
+2. Decision 6 (pictures): Remove the "250 W 25 km/h" rating decal from `cad/src/product_model.py` and re-render the photoreal renders, card and social preview on Amish's Mac.
+3. Decision 3 (calcs): Once the RDW check is done, restate R3 and R4 in SGN-REQ-001 and SGN-CAL-001 if it sets a lower speed cap or requires type approval.
+
+### Points found in the review
+
+- The 250 W, 25 km/h limits follow EU pedelec rules, which cover only pedal-assisted cycles; a pedal-less vehicle probably falls outside them, so the legal check in item 3 may force a lower speed cap or type approval.
+
 ## Session 2026-10-01: design made constructable and prototype build plan (kit 1.7.0)
 
 Under Amish's 2026-09-30 approval of the build plan format ("Extend this across all the other repos") and his instruction to make each design physically buildable while drawing it, this session brought StepGen to the approved standard. TRL stays at 3; nothing was built or tested.

@@ -3,9 +3,9 @@ doc_id: SGN-PRC-001
 title: StepGen design precis
 project: StepGen
 doc_type: Design precis
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,6 +33,10 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Design made constructable (SGN-DDR-003, draft); numbers from SGN-CAL-001 v0.3; cost against the value-engineering target; build plan SGN-BLD-001 and register SGN-DEC-001 linked
+- version: "0.7"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Decisions of 2026-10-02: first country and RDW check, balance test with the first user group'
 ---
 
 # StepGen design precis
@@ -174,8 +178,8 @@ Amish decided the change to a walking vehicle on 2026-09-24 and the choices mark
 
 TRL 3 is the hard stop by Amish's instruction. These questions stay open; the ones that need a test belong to TRL 4, which is on hold.
 
-- Legal category of a pedal-less walking vehicle in the first target country (country proposed, awaiting Amish).
-- Can non-cyclists balance a two-wheeled walking vehicle, or does the first prototype need three wheels? (Co-design; partner open.)
+- Legal category of a pedal-less walking vehicle in the first target country, the Netherlands, to be confirmed with the Dutch vehicle authority (RDW) before any road use (country decided by Amish, 2026-10-02). EU pedelec rules cover pedal-assisted cycles, so the check may set a lower speed cap or require type approval.
+- Can non-cyclists balance a two-wheeled walking vehicle, or does the first prototype need three wheels? A fixed co-design test with the first user group, non-cycling adults of working age who walk or take transit, with older adults as the second group once balance is understood (decided by Amish, 2026-10-02): if most cannot ride at walking pace after a short trial, the three-wheel version is designed. Stride length on the belt is checked in the same sessions.
 - Belt length for tall riders and brisk walking against the 2.4 m length limit (decided: keep 1.05 m pitch; revisit after co-design).
 - Belt drag and walking feel: roller spacing, drag setting and the real roller-bed coefficient (needs a test).
 - Rider dynamics when stumbling, stopping walking abruptly or braking hard; bar height and handle position (co-design and test).

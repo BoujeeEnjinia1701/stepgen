@@ -3,9 +3,9 @@ doc_id: SGN-PRB-001
 title: StepGen problem statement
 project: StepGen
 doc_type: Problem statement
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,6 +29,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.6"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Decisions of 2026-10-02: first user group, the Netherlands as first country (RDW), balance as a fixed co-design test, stride check'
 ---
 
 # StepGen problem statement
@@ -83,7 +87,7 @@ On current rules StepGen does not clearly fit the e-bike category anywhere, beca
 - **EU.** Pedal-assisted cycles with a continuous rated motor power up to 250 W, whose assistance is cut before 25 km/h and only while the rider pedals, are excluded from moped type approval ([Wikipedia summary of EN 15194 and Regulation 168/2013](https://en.wikipedia.org/wiki/Pedelec)). A walking vehicle has no pedals. In the Netherlands, guidance for walking bikes says an electric walking bike may use the pavement only up to 6 km/h and must otherwise use the cycle path or road, and that liability insurance is required for electric versions ([Scouters.nl](https://www.scouters.nl/hulpmiddel-keuze/loopfiets-volwassenen/)). Status in other member states is not established here.
 - **US.** Federal law defines a low-speed electric bicycle as a two- or three-wheeled vehicle with fully operable pedals and a motor under 750 W with a top motor-only speed under 20 mph ([15 USC 2085](https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title15-section2085&num=0&edition=prelim)). Most states use three classes: class 1 (assist only while pedalling, to 20 mph), class 2 (throttle, to 20 mph) and class 3 (assist only while pedalling, to 28 mph), and all of them require operable pedals ([Redtail, state guide](https://redtailebikes.com/blogs/journal/electric-bike-laws)).
 
-The design therefore targets the stricter EU limits. Amish decided on 2026-09-25 that a first target country is picked and the vehicle's legal category confirmed there before any road use. Which country is still open, awaiting Amish.
+The design therefore targets the stricter EU limits. Amish decided on 2026-09-25 that a first target country is picked and the vehicle's legal category confirmed there before any road use. Amish decided on 2026-10-02 that the first country is the Netherlands, with the category confirmed with the Dutch vehicle authority (RDW) before any road use. EU pedelec rules cover pedal-assisted cycles, so a pedal-less vehicle may fall outside them, and the RDW check may set a lower speed cap or require type approval.
 
 ## Out of scope
 
@@ -114,12 +118,12 @@ First-session questions:
 
 - Does walking on a moving vehicle feel safe, and at what speed does it stop feeling safe?
 - Can users step on and off, and put a foot down, without help?
-- Is two-wheel balance acceptable for non-cyclists, or is a three-wheel version needed?
+- Is two-wheel balance acceptable for non-cyclists, or is a three-wheel version needed? A fixed co-design test (decided by Amish, 2026-10-02): if most non-cyclists cannot ride at walking pace after a short trial, the three-wheel version is designed.
 - Where would the vehicle be kept, and can users lift or wheel it into a building?
 
 ## Open questions
 
-- Which user group to start with: non-cycling adults, older adults, or commuters? Proposed, awaiting Amish (no recommendation). The partner is picked later, per area.
-- Can a two-wheeled walking vehicle be balanced by people who never learned to cycle, or does the first prototype need three wheels? To be learned in co-design.
-- Which first target country, and what is the legal category of a pedal-less walking vehicle there? The route is decided (confirm before any road use); the country is proposed, awaiting Amish.
-- Is a 1.0 m belt long enough for the intended users? SGN-CAL-001 shows it fits a 1.75 m rider only up to 5 km/h. To be learned in co-design.
+- Which user group to start with? Decided by Amish on 2026-10-02: non-cycling adults of working age who walk or take transit, with older adults as the second group once balance is understood. The partner is picked later, per area.
+- Can a two-wheeled walking vehicle be balanced by people who never learned to cycle, or does the first prototype need three wheels? To be learned in co-design, as a fixed test (decided by Amish, 2026-10-02): keep two wheels for now and make balance a fixed co-design test: if most non-cyclists cannot ride at walking pace after a short trial, the three-wheel version is designed.
+- What is the legal category of a pedal-less walking vehicle in the first target country? The route is decided (confirm before any road use), and the country is the Netherlands, with the category confirmed with the RDW (decided by Amish, 2026-10-02).
+- Is a 1.0 m belt long enough for the intended users? SGN-CAL-001 shows it fits a 1.75 m rider only up to 5 km/h. To be learned in co-design, where stride length on the belt is one of the checks (decided by Amish, 2026-10-02).

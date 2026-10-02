@@ -3,9 +3,9 @@ doc_id: SGN-REQ-001
 title: StepGen requirements
 project: StepGen
 doc_type: Requirements
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,6 +33,10 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Status from SGN-CAL-001 v0.3 for the constructable design (SGN-DDR-003); R12 reported against the value-engineering target
+- version: "0.7"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Legal classification note: the Netherlands as first country, category confirmed with the RDW (decided by Amish, 2026-10-02)'
 ---
 
 # StepGen requirements
@@ -75,4 +79,4 @@ These are the requirements for the walking-treadmill vehicle at TRL 3. Amish dec
 - **R10 is at risk on mass.** 37.9 kg with the pack leaves 2.1 kg, less than a 10 % growth allowance. The 60 x 30 x 2 mm deck rails (SGN-DDR-002) added 1.08 kg to close the weld fatigue concern.
 - **R12 depends on salvage.** `budget_usd` is a hypothetical value-engineering target, not a limit (Amish, 2026-10-01). Value-engineering target: USD 650. Estimated cost of the constructable design: USD 610 on the salvage reference build (USD 40 under the target); the USD 40 and USD 50 salvage prices are estimates, and an all-new build (USD 750) would be USD 100 over the target.
 - **R9 and R13** can only be verified on hardware, which is TRL 4 work and on hold by Amish's instruction.
-- **Legal classification is unresolved.** R3 and R4 follow EU pedelec limits, but a vehicle without pedals may not qualify as a pedelec in the EU or as an e-bike in the US (see SGN-PRB-001). Amish decided on 2026-09-25 that the category is confirmed in a first target country before any road use; the country is still open.
+- **Legal classification is unresolved.** R3 and R4 follow EU pedelec limits, but a vehicle without pedals may not qualify as a pedelec in the EU or as an e-bike in the US (see SGN-PRB-001). Amish decided on 2026-09-25 that the category is confirmed in a first target country before any road use, and on 2026-10-02 that the country is the Netherlands, with the category confirmed with the Dutch vehicle authority (RDW). The check may set a lower speed cap than R3 or require type approval.

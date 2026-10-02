@@ -3,9 +3,9 @@ doc_id: SGN-DDR-003
 title: StepGen design for construction
 project: StepGen
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,12 +13,16 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Changes that make the concept physically buildable, with the reason for each; made under Amish's 2026-09-30 instruction and open for his review
+- version: "0.2"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Accepted by Amish on 2026-10-02 as made; record stays Draft'
 ---
 
 # 0003: Design for construction
 
 - **Date:** 2026-10-01
-- **Status:** draft. The changes in Tables 1 and 2 were made under Amish's 2026-09-30 instruction to make the design physically buildable; they are open for his review. Nothing here changes what StepGen does, its pitch or its safety case. Nothing here is recorded as accepted.
+- **Status:** accepted. The changes in Tables 1 and 2 were made under Amish's 2026-09-30 instruction to make the design physically buildable. Amish, 2026-10-02: "i approve your recommendations for all 555 open decisions." This accepts P1 to P17 and their knock-on changes as made, recorded in the design decisions register (SGN-DEC-001). Nothing here changes what StepGen does, its pitch or its safety case. The record stays Draft.
 
 ## Context
 

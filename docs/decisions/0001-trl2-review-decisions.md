@@ -3,9 +3,9 @@ doc_id: SGN-DDR-001
 title: StepGen TRL 2 review decisions
 project: StepGen
 doc_type: Design decision record
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,12 +17,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.3"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Items 13 and 14 decided by Amish on 2026-10-02; balance test added to item 1'
 ---
 
 # 0001: TRL 2 review decisions
 
 - **Date:** 2026-09-25
-- **Status:** accepted (items 1 to 12); item 15 decided by Amish, 2026-09-25: go with recommendation (see SGN-DDR-002); items 13 and 14 remain proposed, awaiting Amish
+- **Status:** accepted (items 1 to 12); item 15 decided by Amish, 2026-09-25: go with recommendation (see SGN-DDR-002); items 13 and 14 decided by Amish on 2026-10-02 ("i approve your recommendations for all 555 open decisions.")
 
 ## Context
 
@@ -42,7 +46,7 @@ The options for each item are in `docs/REVIEW.md` (TRL 2 session) and SGN-PRC-00
 
 | # | Item | Decision | Where it now lives |
 | --- | --- | --- | --- |
-| 1 | Form factor | Decided by Amish, 2026-09-25: go with recommendation. Two-wheel, long-wheelbase, bike type (about 2.35 m) so that a natural stride fits on the belt; the three-wheel tadpole version stays open until co-design shows whether non-cyclists can balance | SGN-PRC-001 v0.4, SGN-DWG-001 |
+| 1 | Form factor | Decided by Amish, 2026-09-25: go with recommendation. Two-wheel, long-wheelbase, bike type (about 2.35 m) so that a natural stride fits on the belt; the three-wheel tadpole version stays open until co-design shows whether non-cyclists can balance. Decided by Amish, 2026-10-02: keep two wheels for now and make balance a fixed co-design test: if most non-cyclists cannot ride at walking pace after a short trial, the three-wheel version is designed | SGN-PRC-001 v0.4, SGN-DWG-001 |
 | 2 | Wheels | Decided by Amish, 2026-09-25: go with recommendation. 20 in (ETRTO 406) front and rear | SGN-PRC-001 v0.4, `bom/bom.csv` items 6 and 7 |
 | 3 | Motor and speed class | Decided by Amish, 2026-09-25: go with recommendation. 250 W rated rear geared hub, assist cut at 25 km/h, 15 km/h beginner mode (EU pedelec limits) | SGN-REQ-001 R3 and R4 |
 | 4 | Target range | Decided by Amish, 2026-09-25: go with recommendation. 30 km at 20 km/h on the flat on one SwapCell pack | SGN-REQ-001 R5 |
@@ -57,10 +61,10 @@ The options for each item are in `docs/REVIEW.md` (TRL 2 session) and SGN-PRC-00
 
 ### Items that remain open
 
-Items 13 and 14 had no recommendation to accept and stay **Proposed, awaiting Amish**. Item 15 arose at TRL 3 and is now decided (SGN-DDR-002):
+Items 13 and 14 had no recommendation to accept and stayed **Proposed, awaiting Amish** until Amish decided them on 2026-10-02. Item 15 arose at TRL 3 and is now decided (SGN-DDR-002):
 
-- **13. First user group.** Non-cycling adults, older adults or commuters. No preference was stated, and the partner is left open by item 11.
-- **14. First target country** for the legal classification (item 8 decides the route, not the country).
+- **13. First user group.** Non-cycling adults, older adults or commuters. No preference was stated, and the partner is left open by item 11. **Decided by Amish, 2026-10-02:** non-cycling adults of working age who walk or take transit, with older adults as the second group once balance is understood.
+- **14. First target country** for the legal classification (item 8 decides the route, not the country). **Decided by Amish, 2026-10-02:** the Netherlands, confirming the category with the Dutch vehicle authority (RDW) before any road use.
 - **15. New TRL 3 items** from SGN-CAL-001: the cost overrun against the new $650 budget, belt length for tall riders, deck rail size for weld fatigue, and a key switch in the INTERLOCK loop. **Decided by Amish, 2026-09-25: go with recommendation.** Salvage reference build within $650, belt kept at 1.05 m until co-design, 60 x 30 x 2 mm deck rails, key switch in series with the coding resistor. Recorded in SGN-DDR-002.
 
 ## Consequences

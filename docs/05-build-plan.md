@@ -3,9 +3,9 @@ doc_id: SGN-BLD-001
 title: StepGen prototype build plan
 project: StepGen
 doc_type: Build plan
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
     date: '2026-10-01'
     author: Amish Chadha
     change: First build plan, with pictures by component and step; design made constructable (SGN-DDR-003)
+  - version: "0.2"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: 'Safety stop S7: legal category confirmed with the RDW before road use (decided by Amish, 2026-10-02)'
 ---
 
 # StepGen prototype build plan
@@ -581,7 +585,7 @@ Stop at each point. Carry on only when everything listed is true.
 - **S4. Before the fuse goes in.** With the pack out, the harness checked end to end; the receptacle's power pins read open to the frame; the key switch opens the INTERLOCK loop; every connector seated.
 - **S5. Before the motor is powered.** Rear wheel lifted clear of the floor on a stand; lanyard clipped to the tester; both brake levers cut the motor; fingers and clothing clear of the belt ends and the rear tire.
 - **S6. Before the pack goes in.** S4 and S5 done; the cradle lever snaps over centre; key off.
-- **S7. Before the first ride (TRL 4, outside this plan).** All first checks passed; helmet and a closed, flat, private area; the legal category confirmed before any road use.
+- **S7. Before the first ride (TRL 4, outside this plan).** All first checks passed; helmet and a closed, flat, private area; the legal category confirmed with the Dutch vehicle authority (RDW) before any road use (first country decided by Amish, 2026-10-02).
 
 ## 7. Tools, skills and workspace
 
