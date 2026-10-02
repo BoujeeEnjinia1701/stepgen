@@ -124,9 +124,8 @@ def flow_figure(out):
     return out
 
 
-DECK_PARTS = ("Main frame", "Belt and end rollers", "Roller bed", "Anti-reverse clutch and belt drag",
-              "Belt speed sensor", "Rear wheel with 250 W geared hub motor", "Rear tire and rim (with item 6)",
-              "Guards (heel, roller, side, toe)")
+DECK_PARTS = ("Main frame", "Belt and end rollers", "Roller bed", "Anti-reverse bearing and belt drag",
+              "Belt speed sensor", "Rear wheel with 250 W geared hub motor", "Guards (heel, roller, side, toe, fender)")
 
 if __name__ == "__main__":
     from concept import _render, cutaway_parts
@@ -135,8 +134,8 @@ if __name__ == "__main__":
         key_figures=["Rider walks at 4 to 6 km/h on a 1.05 m free-running belt",
                      "250 W rear hub motor, assist cut at 25 km/h (decided)",
                      "About 9.1 Wh/km at 20 km/h; about 45 km per SwapCell, flat (SGN-CAL-001)",
-                     "Belt top 240 mm above ground; 20 in wheels; 2.35 x 0.61 m",
-                     "About 35 kg without pack; parts about $546 (salvage build), pack excluded"],
+                     "Belt top 240 mm above ground; 20 in wheels; 2.38 x 0.58 m",
+                     "About 35 kg without pack; parts about $610 (salvage build), pack excluded"],
         scale_figure=False, context=[rider()], cut=False, flow=None,
     )
     # Cutaway of the belt deck: section on the vehicle centre line, seen from the left, low camera
@@ -153,7 +152,7 @@ if __name__ == "__main__":
     fig.text(0.02, 0.97, "StepGen: cutaway of the belt deck (section on the centre line)", fontsize=9, fontweight="bold",
              color=INK, va="top")
     fig.text(0.02, 0.97 - 22 / (hgt + 170) * 1.6, "CONCEPT, NOT FOR FABRICATION", fontsize=6.5, color="#B45309", va="top")
-    fig.text(0.02, 0.02, "Belt top run (black) on a bed of 30 mm rollers between 50 mm end rollers; anti-reverse clutch "
-             "(yellow) on the rear roller; heel guard over the rear tire", fontsize=7.5, color="#4B5563", va="bottom")
+    fig.text(0.02, 0.02, "Belt top run (black) on a bed of 30 mm rollers between 50 mm end rollers; one-way bearing inside "
+             "the rear roller; heel guard and fender at the rear", fontsize=7.5, color="#4B5563", va="bottom")
     fig.savefig(cut_png, facecolor="white"); plt.close(fig)
     flow_figure(Path("media") / "flow.png")

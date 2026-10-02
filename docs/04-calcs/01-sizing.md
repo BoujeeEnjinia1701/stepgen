@@ -3,9 +3,9 @@ doc_id: SGN-CAL-001
 title: StepGen sizing calculations
 project: StepGen
 doc_type: Calculation note
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,11 +17,15 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002). Deck rails 60 x 30 x 2 mm; R12 checked on the salvage reference build; key switch fitted; all results re-run
+- version: "0.3"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Re-run for the constructable design (SGN-DDR-003); mass, geometry, lean clearance, cost and cradle standoff updated; cost reported against the value-engineering target
 ---
 
 # StepGen sizing calculations
 
-On paper the walking-treadmill vehicle meets its range, speed, braking, step-off, power, cost and SwapCell interface requirements. Version 0.2 applies the recommendations Amish accepted on 2026-09-25 (SGN-DDR-002): the deck rails grow to 60 x 30 x 2 mm, which clears the weld fatigue concern, and R12 is now checked on the salvage reference build ($546 against $650; the all-new-parts fallback is $721). Three requirements are **at risk**: R1 (a 1.00 m belt fits a 1.75 m rider only up to 5 km/h; the belt stays at 1.05 m until co-design), R6 (the 8 % hill needs 235 W, a 6 % margin to the 250 W rating) and R10 (37.9 kg with the pack, a 2.1 kg margin that is smaller than a 10 % mass-growth allowance). Guarding (R9) and pack retention to SwapCell latch class V1 (R13) cannot be verified until hardware exists, which is TRL 4 work and on hold by Amish's instruction.
+On paper the walking-treadmill vehicle meets its range, speed, braking, step-off, power and SwapCell interface requirements, and its cost is under the value-engineering target. Version 0.2 applied the recommendations Amish accepted on 2026-09-25 (SGN-DDR-002): 60 x 30 x 2 mm deck rails and the salvage reference build. Version 0.3 re-runs every result for the constructable design of SGN-DDR-003: the frame, guards and fixings change the mass slightly (35.1 kg, 37.9 kg with the pack), the vehicle is 2.38 m long with its fender and 0.58 m wide, and the reference build costs USD 610 against a USD 650 value-engineering target (USD 750 with all new parts). Three requirements are **at risk**: R1 (a 1.00 m belt fits a 1.75 m rider only up to 5 km/h; the belt stays at 1.05 m until co-design), R6 (the 8 % hill needs 235 W, a 6 % margin to the 250 W rating) and R10 (37.9 kg with the pack, a 2.1 kg margin that is smaller than a 10 % mass-growth allowance). Guarding (R9) and pack retention to SwapCell latch class V1 (R13) cannot be verified until hardware exists, which is TRL 4 work and on hold by Amish's instruction.
 
 Every number in this note is printed by `docs/04-calcs/sizing.py` (run from the repo root: `python docs/04-calcs/sizing.py`), which also writes `docs/04-calcs/results.csv`. The script takes its geometry from `cad/src/model.py`, its prices from `bom/bom.csv` and its budget from `project.yaml`, so the note, the model and the BOM share one source. All values are first-principles estimates; nothing here is measured.
 
@@ -51,16 +55,16 @@ Every number in this note is printed by `docs/04-calcs/sizing.py` (run from the 
 
 ## 2. Geometry and mass
 
-The model gives a vehicle 2349 mm long, 612 mm wide at the grips, with a 1855 mm wheelbase. The belt runs on end rollers 1050 mm apart, leaving 1000 mm of usable length, 400 mm wide, with its top 240 mm above the ground. Ground clearance under the cross members is 148 mm. The bar is 1230 mm above the ground (990 mm above the belt). A 70° head angle with a 30 mm fork offset gives 58.0 mm of trail and 18.6 mm of wheel flop, in the range of ordinary bicycles. The TRL 2 model had no fork offset, which gave about 90 mm of trail.
+The model gives a vehicle 2379 mm long including the rear fender (2349 mm over the tires), 580 mm wide at the bar, with a 1855 mm wheelbase. The belt runs on end rollers 1050 mm apart, leaving 1000 mm of usable length, 400 mm wide, with its top 240 mm above the ground. Ground clearance under the cross members is 145 mm. The bar is 1230 mm above the ground (990 mm above the belt). A 70° head angle with a 30 mm fork offset gives 58.0 mm of trail and 18.6 mm of wheel flop, in the range of ordinary bicycles. The TRL 2 model had no fork offset, which gave about 90 mm of trail.
 
 *Table 2. Mass estimate.*
 
 | Item | Mass (kg) | Basis |
 | --- | --- | --- |
-| 1 Main frame | 12.5 | Deck rails 6.21 (60 x 30 x 2 mm), cross members 2.04, rear stays 1.29, nose 0.83, down tube 0.98, head tube 0.46, plates 0.70 |
-| 2 Belt and end rollers | 3.8 | Belt 1.3, two rollers 2.2, tensioner 0.3 |
-| 3 Roller bed | 3.0 | 14 rollers at 0.15 kg, carriers 0.9 |
-| 4 Clutch and drag | 0.4 | Estimate |
+| 1 Main frame | 12.7 | Deck rails 6.21 (60 x 30 x 2 mm), two cross members 1.44, nose beam 1.51, four rear stays 0.92, down tube 1.16, machined head tube 0.52, dropouts, caps, lugs, tabs and plates 0.90 |
+| 2 Belt and end rollers | 3.8 | Belt 1.3, two rollers 2.2, axles and tension bolts 0.3 |
+| 3 Roller bed | 2.9 | 14 rollers at 0.15 kg, two aluminium carrier bars 0.8 |
+| 4 One-way bearing and drag screw | 0.1 | The bearing replaces a roller bearing |
 | 5 Belt speed sensor | 0.05 | Estimate |
 | 6 Rear wheel with hub motor | 4.3 | Motor 2.5, rim, spokes, tire and tube 1.6, rotor 0.2 |
 | 7 Front wheel, fork, headset | 3.0 | Wheel 1.6, fork 1.1, headset 0.3 |
@@ -69,14 +73,14 @@ The model gives a vehicle 2349 mm long, 612 mm wide at the grips, with a 1855 mm
 | 10 Receiver cradle, class V1 | 1.0 | 3 mm steel cradle, lever, receptacle |
 | 12 Controller and logic board | 0.6 | Estimate |
 | 13 Display, selector, lanyard, key | 0.3 | Estimate |
-| 14 Guards | 2.0 | About 0.63 m² of 1 mm aluminium plus brackets |
+| 14 Guards | 2.1 | Heel, toe and roller guards in aluminium sheet, HDPE side boards, fender |
 | 15 Harness | 0.4 | Estimate |
-| 16 Hardware and kickstand | 0.9 | Kickstand 0.4, fasteners 0.5 |
-| **Vehicle without pack** | **35.0** | |
+| 16 Hardware and kickstand | 1.0 | Kickstand 0.4, fasteners and rivet nuts 0.6 |
+| **Vehicle without pack** | **35.1** | |
 | SwapCell pack | 2.85 | SWC-CAL-001 |
 | **Vehicle with pack** | **37.9** | R10 limit 40 kg |
 
-The margin to 40 kg is 2.1 kg, or 6 % of the vehicle mass; a 10 % growth allowance would take the vehicle to 41.4 kg, so R10 is **at risk** on mass. The larger deck rails (SGN-DDR-002) add 1.08 kg. With an 80 kg rider the total is 117.9 kg. The vehicle's centre of mass is 909 mm ahead of the rear axle and 324 mm up; the rider's is at 950 mm and 1220 mm; together 937 mm ahead and 932 mm up, with 49 % of the static load on the rear wheel.
+The margin to 40 kg is 2.1 kg, or 6 % of the vehicle mass; a 10 % growth allowance would take the vehicle to 41.4 kg, so R10 is **at risk** on mass. The larger deck rails (SGN-DDR-002) add 1.08 kg. With an 80 kg rider the total is 117.9 kg. The vehicle's centre of mass is 909 mm ahead of the rear axle and 330 mm up; the rider's is at 950 mm and 1220 mm; together 937 mm ahead and 934 mm up, with 49 % of the static load on the rear wheel.
 
 ## 3. Road load, energy and range
 
@@ -112,7 +116,7 @@ The belt length is the weak point of R1. With the step and foot assumptions of T
 | 1.75 m | 0.96 m, fits | 1.05 m, does not fit |
 | 1.90 m | 1.04 m, does not fit | 1.14 m, does not fit |
 
-R1's target of 1.0 m is met exactly, but the target itself is short for tall riders or brisk walking, so R1 is **at risk**. A 1.90 m rider at 6 km/h needs a roller pitch of about 1190 mm, which would make the vehicle about 2.49 m long and break R10 (2.4 m). Decided by Amish, 2026-09-25 (SGN-DDR-002): keep the 1.05 m roller pitch and 2.35 m length, and revisit after co-design shows the riders' heights and pace.
+R1's target of 1.0 m is met exactly, but the target itself is short for tall riders or brisk walking, so R1 is **at risk**. A 1.90 m rider at 6 km/h needs a roller pitch of about 1190 mm, which would make the vehicle about 2.52 m long with its fender and break R10 (2.4 m). Decided by Amish, 2026-09-25 (SGN-DDR-002): keep the 1.05 m roller pitch and 2.35 m length over the tires (2.38 m with the fender of SGN-DDR-003), and revisit after co-design shows the riders' heights and pace.
 
 For comparison, if 40 W of walking drove the wheel with no loss at all, the vehicle would reach only 9.8 km/h on the flat, and a 3 % grade at 5 km/h needs 65 W. This is why the motor does the work. The optional roller generator (not fitted, SGN-DDR-001 item 5) would return 5 to 10 W, a charge of 0.11 to 0.21 A in SwapCell mode 4, and about 5 % more range at 20 km/h.
 
@@ -122,11 +126,11 @@ The 8-magnet ring on the 50 mm front roller gives a pulse every 19.6 mm of belt,
 
 ## 7. Braking, stability and structure
 
-At 3 m/s² the vehicle stops from 25 km/h in 8.0 m after the brakes act (R7, 10 m). With the combined centre of mass 937 mm ahead of the rear axle and 932 mm up, the rear brake alone can give 2.51 m/s² (9.6 m) and the front alone 5.35 m/s² (4.5 m), so either brake alone still stops within 10 m. The vehicle would pitch over only at 9.7 m/s² if the rider were fixed to the deck; the practical limit is the rider, who must resist 240 N at 3 m/s².
+At 3 m/s² the vehicle stops from 25 km/h in 8.0 m after the brakes act (R7, 10 m). With the combined centre of mass 937 mm ahead of the rear axle and 934 mm up, the rear brake alone can give 2.51 m/s² (9.6 m) and the front alone 5.36 m/s² (4.5 m), so either brake alone still stops within 10 m. The vehicle would pitch over only at 9.6 m/s² if the rider were fixed to the deck; the practical limit is the rider, who must resist 240 N at 3 m/s².
 
-The anti-reverse sprag holds the rear roller, so the rider can brace on the belt. With 180° of wrap and a friction coefficient of 0.3 the capstan ratio is 2.57, so the belt needs 273 N of tension per run not to slip under 240 N; the tensioner is set to 500 N. The sprag sees only 6.0 N m.
+The one-way bearing inside the rear roller (SGN-DDR-003) holds it, so the rider can brace on the belt. With 180° of wrap and a friction coefficient of 0.3 the capstan ratio is 2.57, so the belt needs 273 N of tension per run not to slip under 240 N; the tension bolts are set to 500 N. The bearing sees only 6.0 N m against about 56 N m rated for its CSK17 class.
 
-The lowest outboard part when leaning is the clutch housing, which gives 30.3° of lean clearance: a minimum turn radius of 3.0 m at 15 km/h and 8.4 m at 25 km/h.
+The lowest outboard part when leaning is now the kickstand body on the left rail, which gives 32.6° of lean clearance: a minimum turn radius of 2.8 m at 15 km/h and 7.7 m at 25 km/h. (The concept's outboard clutch housing, which set 30° before, is gone.)
 
 The deck rails are now 60 x 30 x 2 mm RHS on edge (I = 159,499 mm⁴, Z = 5317 mm³), decided by Amish on 2026-09-25 (SGN-DDR-002). They carry a 120 kg rider at 2.5 g at mid span at 80 MPa, a factor of 3.0 on yield, with 1.5 mm of deflection. Each step gives a 25.5 MPa stress range, about 12.5 million times in five years of daily use, against 38.8 MPa for a FAT 71 weld with a partial factor of 1.35, so the weld details now have a margin. The previous 50 x 25 x 2 mm rails (version 0.1) gave 37.6 MPa, at the limit; the change adds 1.08 kg, which reduces the R10 mass margin. There is no numbered requirement for structure; this is reported for the review.
 
@@ -139,12 +143,12 @@ StepGen uses the interface unchanged (R11, R13).
 - **Wake (item W).** The receiver fits a 10 kΩ ±1 % coding resistor between INTERLOCK and SGND. With the pack's 100 kΩ pull-up to 3.3 V the node sits at 0.297 to 0.303 V for 9.90 to 10.10 kΩ (plus 0.2 Ω of wiring and switch), inside the 0.24 to 0.37 V window, and the loop draws 30 µA. A key switch sits in series with the resistor (decided by Amish, 2026-09-25, SGN-DDR-002; for use at a standstill only): key off opens the loop, the pack opens its output within 1 ms and sleeps after 60 s at 100 µA (about 0.72 % per month); key on pulls the node below 1.0 V and wakes the pack with no supply from the vehicle. The WAKE pin is not used.
 - **Heartbeat.** The logic board is the SwapCell host: host type 0 (vehicle), requested mode 2 (discharge), host discharge limit 15.0 A. In use the pack supplies 3.9 A at a 20 km/h cruise and at most 8.5 A, inside the 15 A legacy limit, and the pack makes only about 8.0 W of heat at that maximum (110 mΩ), far from the 20 A case that puts SwapCell R3 at risk. Every circuit stays below 60 V DC.
 - **Charge-discharge mode (item C).** Not used. The geared hub freewheels, so there is no regenerative braking, and the roller generator is not fitted.
-- **Latch class V1 (item V).** For a 3.5 kg design pack, 8 g gives 275 N and 25 g gives 858 N. The pack latch proof is 1717 N (1.72 kN). The receiver must preload the pack against its end stop with 330 N or more, which an over-centre lever with a ratio of 6.6 gives at a 50 N hand force. The cradle's two M6 8.8 bolts see 21 MPa in shear at 25 g (a factor of 22 on 480 MPa), and the 44 x 2 mm down tube sees 19 MPa from the shock at a 60 mm standoff. Retention under vibration can only be shown by test, so R13 is **not verifiable at TRL 3**.
+- **Latch class V1 (item V).** For a 3.5 kg design pack, 8 g gives 275 N and 25 g gives 858 N. The pack latch proof is 1717 N (1.72 kN). The receiver must preload the pack against its end stop with 330 N or more, which an over-centre lever with a ratio of 6.6 gives at a 50 N hand force. The cradle's two M6 8.8 bolts see 21 MPa in shear at 25 g (a factor of 22 on 480 MPa), and the 44 x 2 mm down tube sees 24 MPa from the shock at the pack's 75 mm standoff. Retention under vibration can only be shown by test, so R13 is **not verifiable at TRL 3**.
 - **Flag to SwapCell.** The vehicle's logic board is powered from the pack output, so after a key-on wake the pack will enter legacy discharge (no heartbeat within 2 s) before the board can send one. The v0.3 behavior rules do not say whether a pack in legacy discharge moves to mode 2 when a heartbeat arrives. This is flagged to the SwapCell project, not changed here.
 
 ## 9. Cost
 
-All 16 BOM lines are priced at new-part prices. Amish decided on 2026-09-25 (SGN-DDR-002) to keep the $650 budget and make the salvage route the reference build, with new parts as the fallback. On the reference build (a used walking-pad treadmill for items 2 and 3 at about $40, and a donor 20 in bike for items 7 and 9 at about $50) the StepGen parts total, pack excluded, is **$546 against $650: under by $104**, so R12 is **met on paper**. The all-new-parts fallback is $721, $71 (11 %) over the budget; it is reported but not held to R12. The larger deck rails add about $8 to item 1.
+All 16 BOM lines are priced at new-part prices. Amish decided on 2026-09-25 (SGN-DDR-002) to make the salvage route the reference build, with new parts as the fallback, and on 2026-10-01 that `budget_usd` is a hypothetical value-engineering target, not a limit. Value-engineering target: USD 650. Estimated cost of the constructable design: **USD 610 on the reference build** (USD 40 under the target), pack excluded. The reference build uses a used walking-pad treadmill for items 2 and 3 at about USD 40 and a donor 20 in bike for the front wheel and brakes at about USD 50; the donor's 20 in fork is too short for the head tube (SGN-DDR-003), so the fork and headset are bought, about USD 40. The all-new-parts fallback is USD 750, USD 100 over the target; it is reported, not held to R12. Making the design constructable added USD 64 to the reference build (USD 546 before).
 
 ## 10. Results against requirements
 
@@ -158,16 +162,16 @@ All 16 BOM lines are priced at new-part prices. Amish decided on 2026-09-25 (SGN
 | R4 | 250 W rated motor specified; wheel power capped at 250 W | 250 W rated or less | Met (on paper) |
 | R5 | 45 km at 20 km/h on the flat (9.1 Wh/km); about 32 km in real use | 30 km at 20 km/h | Met |
 | R6 | 235 W at the wheel for 8 % at 8 km/h (6 % margin) | 8 % at 8 km/h within 250 W | At risk |
-| R7 | 8.0 m at 3 m/s²; rear brake alone 9.6 m; belt held by the sprag with 500 N tension | Two brakes; 10 m from 25 km/h; belt cannot run forward | Met (on paper) |
-| R8 | Belt top 240 mm; side boards 6 mm proud of the belt, no rails | 250 mm or less; open sides | Met |
+| R7 | 8.0 m at 3 m/s²; rear brake alone 9.6 m; belt held by the one-way bearing with 500 N tension | Two brakes; 10 m from 25 km/h; belt cannot run forward | Met (on paper) |
+| R8 | Belt top 240 mm; side boards 9 mm proud of the belt, no rails | 250 mm or less; open sides | Met |
 | R9 | Guards modelled at both nips, the rear tire and belt ends; gaps not yet checked against ISO 13857 | Nips, spokes and rear tire guarded | Not verifiable at TRL 3 |
-| R10 | 2.35 m long, 0.61 m wide, 37.9 kg with the pack (2.1 kg margin) | 2.4 m, 0.65 m, 40 kg | At risk |
+| R10 | 2.38 m long with the fender, 0.58 m wide, 37.9 kg with the pack (2.1 kg margin) | 2.4 m, 0.65 m, 40 kg | At risk |
 | R11 | Interface v0.3: 10 kΩ coded INTERLOCK (node 0.30 V), vehicle heartbeat mode 2; 8.5 A maximum; below 60 V | SwapCell v0.3 unchanged; 15 A or less; below 60 V DC | Met (on paper) |
-| R12 | Reference (salvage) build $546 excluding the pack; all-new-parts fallback $721 | $650 excluding the pack on the reference build | Met (on paper) |
+| R12 | Reference (salvage) build USD 610 excluding the pack, USD 40 under the value-engineering target; all-new-parts fallback USD 750 | USD 650 value-engineering target excluding the pack on the reference build | Under the target (on paper) |
 | R13 | Class V1 receiver specified: preload 330 N, lever ratio 6.6, bolt factor 22 at 25 g | SwapCell latch class V1, no release or contact break | Not verifiable at TRL 3 |
 
 ## 11. Checks against the documents
 
-The TRL 2 figures were checked against this note and the documents were corrected where they differed: vehicle mass 35 kg became 34.0 kg (36.8 kg with the heavier 2.85 kg pack), 9.0 Wh/km became 9.1 Wh/km once the 3 W auxiliary load was included, range 46 km became 45 km, pack power 179 W became 182 W, walking power 20 to 40 W became 30 to 41 W at 5 km/h, the 8 % hill 236 W became 233 W, the no-loss mechanical drive 7 to 9 km/h became 9.9 km/h, trail went from about 90 mm (no fork offset) to 58 mm, and the parts cost $630 became $713. Version 0.2 (SGN-DDR-002) moved the vehicle to 35.0 kg (37.9 kg with the pack), the hill to 235 W and the cost to $546 on the reference build ($721 all new).
+The TRL 2 figures were checked against this note and the documents were corrected where they differed: vehicle mass 35 kg became 34.0 kg (36.8 kg with the heavier 2.85 kg pack), 9.0 Wh/km became 9.1 Wh/km once the 3 W auxiliary load was included, range 46 km became 45 km, pack power 179 W became 182 W, walking power 20 to 40 W became 30 to 41 W at 5 km/h, the 8 % hill 236 W became 233 W, the no-loss mechanical drive 7 to 9 km/h became 9.9 km/h, trail went from about 90 mm (no fork offset) to 58 mm, and the parts cost $630 became $713. Version 0.2 (SGN-DDR-002) moved the vehicle to 35.0 kg (37.9 kg with the pack), the hill to 235 W and the cost to $546 on the reference build ($721 all new). Version 0.3 (SGN-DDR-003) moves it to 35.1 kg, 2.38 m long, 0.58 m wide, 145 mm ground clearance, 32.6° lean clearance and USD 610 on the reference build (USD 750 all new).
 
 > **Safety:** These are paper sizings for a vehicle a person stands and walks on, driven by a 468 Wh lithium-ion pack at up to 54.6 V DC. The braking, belt-slip, fatigue, steering-column and latch figures above are not a substitute for testing, which is TRL 4 work and on hold. Nothing here clears the design for building or riding.

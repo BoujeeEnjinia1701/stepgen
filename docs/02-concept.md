@@ -3,9 +3,9 @@ doc_id: SGN-PRC-001
 title: StepGen design precis
 project: StepGen
 doc_type: Design precis
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,11 +29,15 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.6"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Design made constructable (SGN-DDR-003, draft); numbers from SGN-CAL-001 v0.3; cost against the value-engineering target; build plan SGN-BLD-001 and register SGN-DEC-001 linked
 ---
 
 # StepGen design precis
 
-StepGen is a walking-treadmill vehicle. The rider stands upright on a free-running belt (end rollers 1.05 m apart) between two 20 in wheels and walks at an ordinary 4 to 6 km/h; a sensor on the belt roller reads the walking speed, and a 250 W geared hub motor in the rear wheel, powered by a shared SwapCell pack, drives the vehicle at up to 25 km/h. The belt is a control input, not the engine: walking puts only about 30 to 41 W into the belt at 5 km/h, while cruising at 20 km/h needs about 136 W at the wheel. The sizing note SGN-CAL-001 v0.2 gives about 9.1 Wh/km at 20 km/h, about 45 km on one SwapCell pack on the flat, 35.0 kg without the pack and a parts cost of about $546 excluding the pack on the salvage reference build, inside the $650 budget ($721 with all new parts). The general arrangement is drawing SGN-DWG-001 (`cad/drawings/SGN-DWG-001.pdf`), generated from `cad/src/model.py`.
+StepGen is a walking-treadmill vehicle. The rider stands upright on a free-running belt (end rollers 1.05 m apart) between two 20 in wheels and walks at an ordinary 4 to 6 km/h; a sensor on the belt roller reads the walking speed, and a 250 W geared hub motor in the rear wheel, powered by a shared SwapCell pack, drives the vehicle at up to 25 km/h. The belt is a control input, not the engine: walking puts only about 30 to 41 W into the belt at 5 km/h, while cruising at 20 km/h needs about 136 W at the wheel. The sizing note SGN-CAL-001 v0.2 gives about 9.1 Wh/km at 20 km/h, about 45 km on one SwapCell pack on the flat, 35.1 kg without the pack and a parts cost of about USD 610 excluding the pack on the salvage reference build, against a USD 650 value-engineering target (USD 750 with all new parts). The constructable design of SGN-DDR-003 is built step by step in the prototype build plan SGN-BLD-001 (`docs/05-build-plan.md`); open decisions are in the design decisions register SGN-DEC-001 (`docs/06-design-decisions.md`). The general arrangement is drawing SGN-DWG-001 (`cad/drawings/SGN-DWG-001.pdf`), generated from `cad/src/model.py`.
 
 > **Decisions.** Amish decided on 2026-09-24 that StepGen becomes a walking-treadmill vehicle like the Lopifit walking bike: "as the person walks his scooter / bike moves forward but hes upright walking instead of pedalling". The stationary stepper generator of version 0.2 is dropped entirely and no longer charges a PowerBox. On 2026-09-25 Amish accepted the TRL 2 recommendations for form factor, wheels, motor and speed class, range, regeneration, area, budget and legal route, and the move to SwapCell interface v0.3 (SGN-DDR-001). On 2026-09-25 he also accepted the TRL 3 recommendations (SGN-DDR-002): the salvage route as the reference build within $650, the 1.05 m belt kept until co-design, 60 x 30 x 2 mm deck rails and a key switch in the INTERLOCK loop. Items still proposed, awaiting Amish, are marked as such.
 
@@ -65,10 +69,10 @@ Numbers match the exploded view and `bom/bom.csv`.
 
 | # | Component | Choice | Notes |
 | --- | --- | --- | --- |
-| 1 | Main frame | Welded mild steel: 60 x 30 x 2 mm deck rails, cross members, rear stays, nose, 44 mm down tube and head tube | Wheelbase 1.86 m; about 12.5 kg; rails decided by Amish, 2026-09-25 (SGN-DDR-002) |
+| 1 | Main frame | Welded mild steel: 60 x 30 x 2 mm deck rails, two cross members under them, a nose beam, four rear stays, 44 mm down tube, bought head tube machined for a ZS44 headset | Wheelbase 1.86 m; about 12.7 kg; rails decided by Amish, 2026-09-25 (SGN-DDR-002) |
 | 2 | Belt and end rollers | 400 mm treadmill belt, two 50 mm crowned rollers 1.05 m apart, tensioner at about 500 N per run | Belt top 240 mm above the ground; 1.00 m usable |
 | 3 | Roller bed | 14 gravity conveyor rollers, 30 mm, at about 70 mm pitch under the top run | Push about 22 to 30 N; a slider deck would need 78 to 157 N |
-| 4 | Anti-reverse clutch and belt drag | Sprag one-way bearing on the rear roller, adjustable drag | Belt runs rearward only; drag sets the feel |
+| 4 | Anti-reverse clutch and belt drag | One-way (sprag) bearing inside the rear roller; felt-tipped drag screw through the right rail | Belt runs rearward only; drag sets the feel |
 | 5 | Belt speed sensor | Hall sensor and 8-magnet ring on the front roller | The only input that commands assist |
 | 6 | Rear wheel with 250 W geared hub motor | 48 V 250 W geared hub wound for a 20 in wheel (about 400 rpm no-load at 48 V), torque arms | Decided by Amish, 2026-09-25 |
 | 7 | Front wheel, fork and headset | 20 in wheel, steel disc fork with 30 mm offset, 70° head angle | Trail 58 mm |
@@ -101,16 +105,16 @@ All values come from the sizing note SGN-CAL-001 (`docs/04-calcs/sizing.py`), wh
 | Range on one SwapCell pack | 58 km at 15 km/h, 45 km at 20 km/h, 35 km at 25 km/h on the flat; about 32 km at 20 km/h in real use | 411 Wh usable; real use x 1.4 energy | R5 (30 km at 20 km/h) met |
 | Hill | 8 % at 8 km/h needs 235 W at the wheel (26.1 N m); at 250 W the vehicle climbs 5 % at 12.1 km/h and 10 % at 7.0 km/h | Grade plus road load | R6 at risk (6 % margin) |
 | Acceleration | Limited to 1.0 m/s² by a 32 N m torque limit; 0 to 20 km/h in about 12 s | 250 W cap | R3 met on paper |
-| Mass | 35.0 kg without the pack, 37.9 kg with it | Table 2 of SGN-CAL-001 | R10 at risk (2.1 kg margin) |
-| Size | 2.35 m long, 0.61 m wide at the grips, 1.31 m high; wheelbase 1.86 m | Model | R10 met on length and width |
-| Belt | End rollers 1.05 m apart, 1.00 m usable, 400 mm wide, top 240 mm above the ground; 148 mm ground clearance | Model | R1 at risk (belt kept until co-design), R8 met |
+| Mass | 35.1 kg without the pack, 37.9 kg with it | Table 2 of SGN-CAL-001 | R10 at risk (2.1 kg margin) |
+| Size | 2.38 m long with the rear fender (2.35 m over the tires), 0.58 m wide at the bar, 1.29 m high; wheelbase 1.86 m | Model | R10 met on length and width |
+| Belt | End rollers 1.05 m apart, 1.00 m usable, 400 mm wide, top 240 mm above the ground; 145 mm ground clearance | Model | R1 at risk (belt kept until co-design), R8 met |
 | Rider push and power into the belt | 21.7 to 29.7 N at 5 km/h, or 30 to 41 W, all dissipated as belt drag | Roller bed 0.02 x 80 kg x 9.81 = 15.7 N, plus bending, bearings and the 0 to 8 N drag setting | R1 |
 | Rider effort | About 250 to 350 W metabolic, light exercise similar to ordinary walking | About 3 to 3.5 MET for an 80 kg adult | |
 | Motor off | 261 ms after the belt stops; about 30 ms from a brake lever or the lanyard | Timing budget | R2 met on paper |
 | Braking | 8.0 m from 25 km/h at 3 m/s²; rear brake alone 9.6 m, front alone 4.5 m | v² / 2a with load transfer | R7 met on paper |
-| Steering | 70° head angle, 30 mm fork offset, 58 mm trail; 30° lean clearance | Model | |
+| Steering | 70° head angle, 30 mm fork offset, 58 mm trail; 32.6° lean clearance | Model | |
 | Optional roller generator (not fitted) | 5 to 10 W to the pack in SwapCell mode 4 for about 15 W of extra walking effort; about 5 % more range | Small BLDC at about 60 % from belt to pack | Decided: not in the first concept |
-| Parts cost | $546 excluding the pack on the salvage reference build; $721 with all new parts | `bom/bom.csv` | R12 met on paper ($650, reference build) |
+| Parts cost | USD 610 excluding the pack on the salvage reference build; USD 750 with all new parts | `bom/bom.csv` | R12: USD 40 under the USD 650 value-engineering target (reference build) |
 
 ### Why the motor does the work
 
@@ -149,7 +153,7 @@ Amish decided the change to a walking vehicle on 2026-09-24 and the choices mark
 - **Regeneration from the belt: not in the first concept.** Decided. It would return only about 5 to 10 W, costs about $35 to $50 and makes walking harder. SwapCell v0.3 now has the charge-discharge mode it would need, but that does not change the balance. A mounting point on the front roller stays for a later study.
 - **Steering geometry: 30 mm fork offset and 38 x 2 mm column (TRL 3).** Without offset the 70° head gave about 90 mm of trail, heavy for a 20 in wheel; 30 mm of offset gives 58 mm. A 32 mm column would reach a factor of only 1.4 on yield under a 500 N push at the bar.
 - **Deck rails: 60 x 30 x 2 mm.** Decided by Amish, 2026-09-25 (SGN-DDR-002). The 50 x 25 x 2 mm rails of version 0.4 had ample static strength (factor 2.0), but their walking stress range at the welds (37.6 MPa) was at the fatigue limit (38.8 MPa). The larger rails cut it to 25.5 MPa (static factor 3.0) for 1.08 kg, which leaves a 2.1 kg margin to the 40 kg limit of R10.
-- **Cost route: salvage reference build.** Decided by Amish, 2026-09-25 (SGN-DDR-002). A used walking-pad treadmill supplies the belt, rollers and roller bed (items 2 and 3) and a donor 20 in bike supplies the front wheel, fork and brakes (items 7 and 9), for about $546 in total; new parts ($721) are the fallback.
+- **Cost route: salvage reference build.** Decided by Amish, 2026-09-25 (SGN-DDR-002). A used walking-pad treadmill supplies the belt, rollers and roller bed (items 2 and 3) and a donor 20 in bike supplies the front wheel and brakes (items 7 and 9), for about USD 610 in total; the donor's fork is too short for the head tube, so the fork and headset are bought (SGN-DDR-003). New parts (USD 750) are the fallback.
 
 ## Safety
 

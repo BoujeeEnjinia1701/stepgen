@@ -2,19 +2,19 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827) [![DOI](https://zenodo.org/badge/1386435076.svg)](https://zenodo.org/badge/latestdoi/1386435076) [![REUSE compliant](https://github.com/BoujeeEnjinia1701/stepgen/actions/workflows/reuse.yml/badge.svg)](https://github.com/BoujeeEnjinia1701/stepgen/actions/workflows/reuse.yml) [![Archived in Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/BoujeeEnjinia1701/stepgen/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/BoujeeEnjinia1701/stepgen)
 
-**Area:** Mobility and Logistics · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** $650 USD on the salvage reference build, SwapCell pack excluded · **Difficulty:** 3 of 5
+**Area:** Mobility and Logistics · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** $650 USD on the salvage reference build (estimated cost of the constructable design $610), SwapCell pack excluded · **Difficulty:** 3 of 5
 
 Walking-treadmill vehicle: the rider stands upright and walks at a normal pace on a short free-running belt between the wheels, a belt-speed sensor sets the assist of a 250 W hub motor, and the vehicle moves at e-bike speed (up to 25 km/h) on a shared SwapCell pack. Walking is the control input; the motor does the work.
 
 ![StepGen: walking-treadmill e-bike with a 250 W hub motor, product render](media/render-hero.png)
 
-[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [General arrangement (PDF)](cad/drawings/SGN-DWG-001.pdf) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
+[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [General arrangement (PDF)](cad/drawings/SGN-DWG-001.pdf) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Prototype build plan](docs/05-build-plan.md) · [Design decisions](docs/06-design-decisions.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 
 Walking is the one way of moving that almost everyone already knows, so StepGen uses it as the control input instead of asking new riders to learn to pedal and balance on a saddle. The rider walks at an ordinary pace on a free-running belt; a sensor reads that pace and a 250 W hub motor does the propulsion, because a person walking puts only about 30 to 41 W into the belt, far less than the 136 W the vehicle needs at 20 km/h ([SGN-CAL-001](docs/04-calcs/01-sizing.md)). Walking sets the speed, gives light exercise and stops the motor as soon as the rider stops.
 
-Commercial walking bikes exist but cost from about €3,000 and weigh about 55 kg ([Lopifit, "What is a Lopifit?"](https://www.lopifit.com/what-is-a-lopifit/)). StepGen is open hardware so that a local welder or bike mechanic can build it from a salvaged walking-pad treadmill, a donor 20 in bike and common e-bike parts for about $546, share one SwapCell pack with other portfolio vehicles, and adapt the design to the riders they serve.
+Commercial walking bikes exist but cost from about €3,000 and weigh about 55 kg ([Lopifit, "What is a Lopifit?"](https://www.lopifit.com/what-is-a-lopifit/)). StepGen is open hardware so that a local welder or bike mechanic can build it from a salvaged walking-pad treadmill, a donor 20 in bike and common e-bike parts for about $610, share one SwapCell pack with other portfolio vehicles, and adapt the design to the riders they serve.
 
 ## Burning platform
 
@@ -62,17 +62,23 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
 ## Key components
 
-- Long-wheelbase steel frame (2.35 m long, 1.86 m wheelbase, 60 x 30 x 2 mm deck rails) with two 20 in wheels
-- Free-running treadmill belt on a roller bed, with an anti-reverse clutch
+- Long-wheelbase welded steel frame (2.38 m long with the fender, 1.86 m wheelbase, 60 x 30 x 2 mm deck rails) with two 20 in wheels
+- Free-running treadmill belt on a roller bed, with a one-way bearing in the rear roller so the belt runs rearward only
 - Belt-speed sensor that sets the motor assist
 - 250 W geared rear hub motor and 48 V controller, assist cut at 25 km/h, 15 km/h beginner mode
 - Shared 48 V SwapCell pack (interface v0.3) in a down-tube cradle to latch class V1, woken by a 10 kΩ INTERLOCK coding resistor (pack not in the parts cost)
 - Two disc brakes with motor cut-off levers, a lanyard stop switch and a key switch in the SwapCell INTERLOCK loop
 - Guards over the belt rollers and the rear tire
 
-TRL 3 sizing ([SGN-CAL-001](docs/04-calcs/01-sizing.md)): about 9.1 Wh/km at 20 km/h, about 45 km per SwapCell pack on the flat, 35.0 kg without the pack, and $546 in parts excluding the pack on the salvage reference build, inside the $650 budget ($721 with all new parts; see [SGN-DDR-002](docs/decisions/0002-recommendations-accepted.md) and the [review note](docs/REVIEW.md)). The parametric model is `cad/src/model.py`, with STEP files in `cad/step/`.
+TRL 3 sizing ([SGN-CAL-001](docs/04-calcs/01-sizing.md)): about 9.1 Wh/km at 20 km/h, about 45 km per SwapCell pack on the flat, 35.1 kg without the pack, and an estimated $610 in parts excluding the pack on the salvage reference build, $40 under the $650 value-engineering target ($750 with all new parts; see [SGN-DDR-002](docs/decisions/0002-recommendations-accepted.md), [SGN-DDR-003](docs/decisions/0003-design-for-construction.md) and the [review note](docs/REVIEW.md)). The parametric model is `cad/src/model.py`, with STEP files in `cad/step/`.
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv).
+
+## Building the prototype
+
+The [prototype build plan](docs/05-build-plan.md) (SGN-BLD-001) shows how to build the first proof-of-concept StepGen, component by component, with a making sketch for every made part, close-ups of the joints and a picture for every assembly step. The frame is welded from stock steel tube and plate; the belt and rollers come from a used walking-pad treadmill and the wheels, brakes and motor are bought. Making the concept buildable changed some parts (rear stays, nose beam, head tube, cradle, guards and fixings) without changing what the vehicle does; the changes are in [SGN-DDR-003](docs/decisions/0003-design-for-construction.md), and decisions still open are in the [design decisions register](docs/06-design-decisions.md). It is a plan: building and testing to it is TRL 4 work.
+
+![StepGen prototype: every component, pulled apart and numbered in build order](docs/05-build-plan/overview.png)
 
 ## Safety
 
@@ -82,7 +88,7 @@ The priced bill of materials is in [bom/bom.csv](bom/bom.csv).
 
 | Folder | Contents |
 | --- | --- |
-| `docs/` | Problem, concept, requirements, calculations and design decisions |
+| `docs/` | Problem, concept, requirements, calculations, prototype build plan and design decisions |
 | `cad/src/` | build123d Python source, the source of truth for all geometry |
 | `cad/step/`, `cad/stl/` | Exported models for FreeCAD, other CAD tools and printing |
 | `cad/drawings/` | 2D sketches and dimensioned drawings |

@@ -5,10 +5,10 @@ R3,"Cut at 25 km/h, beginner 15 km/h; torque limit 32 N m gives 1.0 m/s2","25 km
 R4,250 W rated motor specified; wheel power capped at 250 W,250 W rated or less,Met (on paper)
 R5,45 km at 20 km/h on the flat (9.1 Wh/km); about 32 km in real use,30 km at 20 km/h,Met
 R6,235 W at the wheel for 8 % at 8 km/h (6 % margin),8 % at 8 km/h within 250 W,At risk
-R7,8.0 m at 3 m/s2; rear brake alone 9.6 m; belt held by sprag with 500 N tension,Two brakes; 10 m from 25 km/h; belt cannot run forward,Met (on paper)
-R8,"Belt top 240 mm; side boards 6 mm proud of the belt, no rails",250 mm or less; open sides,Met
+R7,8.0 m at 3 m/s2; rear brake alone 9.6 m; belt held by the one-way bearing with 500 N tension,Two brakes; 10 m from 25 km/h; belt cannot run forward,Met (on paper)
+R8,"Belt top 240 mm; side boards 9 mm proud of the belt, no rails",250 mm or less; open sides,Met
 R9,"Guards modelled at both nips, rear tire and belt ends; gaps not yet checked against ISO 13857","Nips, spokes and rear tire guarded",Not verifiable at TRL 3
-R10,"2.35 m long, 0.61 m wide, 37.9 kg with pack (2.1 kg margin, less than a 10 % growth allowance)","2.4 m, 0.65 m, 40 kg",At risk
+R10,"2.38 m long, 0.58 m wide, 37.9 kg with pack (2.1 kg margin, less than a 10 % growth allowance)","2.4 m, 0.65 m, 40 kg",At risk
 R11,"Interface v0.3: 10 kOhm coded INTERLOCK (node 0.30 V), vehicle heartbeat mode 2; 8.5 A maximum; below 60 V",SwapCell v0.3 unchanged; 15 A or less; below 60 V DC,Met (on paper)
-R12,Reference (salvage) build $546 excluding the pack; all-new-parts fallback $721,$650 excluding the pack on the reference build,Met (on paper)
+R12,"Reference (salvage) build $610 excluding the pack, $40 under the value-engineering target; all-new-parts fallback $750",$650 value-engineering target excluding the pack on the reference build,Under the target (on paper)
 R13,"Class V1 receiver specified: preload 330 N, lever ratio 6.6, bolts factor 22 at 25 g","SwapCell latch class V1, no release or contact break",Not verifiable at TRL 3

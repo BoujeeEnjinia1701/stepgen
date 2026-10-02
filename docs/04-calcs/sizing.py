@@ -79,17 +79,17 @@ def kg(area_mm2, length_mm, rho=ST):
 
 rail_len = P["rail_x1"] - P["rail_x0"]
 RH, RW, RT = P["rail_h"], P["rail_w"], P["rail_t"]   # deck rail section (SGN-DDR-002: 60 x 30 x 2)
-lower_stay = math.dist((P["rail_x0"], P["rail_y"], G["roll_z"] - 15), (0, 70, P["wheel_r"]))
-upper_stay = math.dist((P["rail_x0"] + 180, P["rail_y"], G["roll_z"] + 5), (0, 70, P["wheel_r"] + 10))
-nose_len = math.dist((P["rail_x1"], P["rail_y"], G["roll_z"] - 15), (G["dt_lo"][0], 40, G["dt_lo"][1]))
+D = model.derived()
+upper_stay, lower_stay = D["stay_len"]
+frame_w = 2 * (P["rail_y"] + P["rail_w"] / 2)        # cross members and nose beam span the outside of the rails
 frame_items = [
     (f"deck rails {RH:.0f}x{RW:.0f}x{RT:.0f} RHS", kg(rhs(RH, RW, RT), 2 * rail_len)),
-    ("cross members 25x25x2 RHS", kg(rhs(25, 25, 2), 3 * 2 * P["rail_y"])),
-    ("rear stays 22x1.6", kg(chs(22, 1.6), 2 * lower_stay + 2 * upper_stay)),
-    ("nose tubes 28x1.6 and block", kg(chs(28, 1.6), 2 * nose_len) + 0.40),
+    ("cross members 25x25x2 RHS (2, under the rails)", kg(rhs(25, 25, 2), 2 * frame_w)),
+    ("nose beam 60x40x2 RHS", kg(rhs(P["nose_w"], P["nose_h"], 2), frame_w)),
+    ("rear stays 22x1.6 (4)", kg(chs(22, 1.6), 2 * lower_stay + 2 * upper_stay)),
     ("down tube 44x2", kg(chs(44, 2), G["dt_len"])),
-    ("head tube 44x3", kg(chs(44, 3), P["head_len"])),
-    ("dropouts, roller plates, tensioner, tabs", 0.70),
+    ("head tube 50x3, bought machined (ZS44)", kg(chs(2 * P["head_r"], P["head_r"] - P["head_bore_r"]), P["head_len"])),
+    ("dropouts, end caps, lugs, tabs, plates, sleeves", 0.90),
 ]
 frame_kg = sum(m for _, m in frame_items)
 for n, m in frame_items:
@@ -97,26 +97,26 @@ for n, m in frame_items:
 print(f"  frame total {frame_kg:.1f} kg")
 
 col_len = (P["bar_z"] - G["head_top"][1]) / G["steer_dir"][1]
-steer_kg = kg(chs(38, 2), col_len) + 0.30 + 0.35 + 0.20
+steer_kg = kg(chs(38, 2), col_len - 58) + kg(chs(33.7, 2.3), 80) + 0.30 + 0.35 + 0.20
 dtx0, dtz0 = G["dt_lo"]; dtx1, dtz1 = G["dt_hi"]
 pack_x = dtx0 + (dtx1 - dtx0) * P["pack_pos"]; pack_z = dtz0 + (dtz1 - dtz0) * P["pack_pos"] + 60
 # item, mass kg, x mm, z mm, basis
 masses = [
     ("1 Main frame", frame_kg, 800, 260, "tube list above"),
-    ("2 Belt and end rollers", 3.8, 845, 215, "belt 1.3 kg (1.5 kg/m2), rollers 2 x 1.1 kg, tensioner 0.3 kg"),
-    ("3 Roller bed", 3.0, 845, 222, "14 x 0.15 kg rollers, carriers 0.9 kg"),
-    ("4 Anti-reverse clutch and drag", 0.4, P["rear_roller_x"], 215, "estimate"),
+    ("2 Belt and end rollers", 3.8, 845, 215, "belt 1.3 kg (1.5 kg/m2), rollers 2 x 1.1 kg, axles, tension bolts 0.3 kg"),
+    ("3 Roller bed", 2.9, 845, 222, "14 x 0.15 kg rollers, two 50 x 3 mm aluminium carrier bars 0.8 kg"),
+    ("4 Anti-reverse bearing and drag screw", 0.1, P["rear_roller_x"], 215, "one-way bearing replaces a roller bearing"),
     ("5 Belt speed sensor", 0.05, G["front_roller_x"], 215, "estimate"),
     ("6 Rear wheel with hub motor", 4.3, 0, P["wheel_r"], "motor 2.5 kg, rim, spokes, tire, tube 1.6 kg, rotor 0.2 kg"),
     ("7 Front wheel, fork, headset", 3.0, G["front_x"], 300, "wheel 1.6 kg, fork 1.1 kg, headset 0.3 kg"),
-    ("8 Steering column, bar, grips", steer_kg, 1480, 950, f"38x2 column {col_len:.0f} mm, stem, bar, grips"),
+    ("8 Steering column, bar, grips", steer_kg, 1480, 950, f"38x2 column, 33.7x2.3 clamp sleeve, stem, bar, grips"),
     ("9 Brakes", 1.1, 900, 450, "2 calipers, rotors, levers, cables"),
     ("10 Receiver cradle, class V1", 1.0, pack_x, pack_z - 40, "3 mm steel cradle, lever, receptacle"),
     ("12 Controller and logic board", 0.6, 1500, 280, "estimate"),
     ("13 Display, selector, lanyard, key", 0.3, P["bar_x"], P["bar_z"], "estimate"),
-    ("14 Guards", 2.0, 600, 300, "about 0.63 m2 of 1 mm aluminium plus brackets"),
+    ("14 Guards", 2.1, 600, 300, "heel, toe and roller guards in aluminium sheet, HDPE side boards, fender"),
     ("15 Harness with fuse", 0.4, 900, 250, "estimate"),
-    ("16 Hardware and kickstand", 0.9, 500, 250, "kickstand 0.4 kg, fasteners 0.5 kg"),
+    ("16 Hardware and kickstand", 1.0, 500, 250, "kickstand 0.4 kg, fasteners and rivet nuts 0.6 kg"),
 ]
 veh_kg = sum(m for _, m, *_ in masses)
 for n, m, *_ in masses:
@@ -274,7 +274,8 @@ MU_W = 0.3
 cap = math.exp(MU_W * math.pi)
 t0_min = F_brk / 2 * (cap + 1) / (cap - 1)
 print(f"belt on the locked rear roller: capstan ratio {cap:.2f}; tension per run for {F_brk:.0f} N without slip "
-      f"{t0_min:.0f} N (set {T0:.0f} N); sprag torque {F_brk * P['roller_r'] / 1000:.1f} N m")
+      f"{t0_min:.0f} N (set {T0:.0f} N); one-way bearing torque {F_brk * P['roller_r'] / 1000:.1f} N m "
+      f"(CSK17 class rated about 56 N m)")
 lean = G["lean_clearance_deg"]
 for kmh in (15, 25):
     vv = kmh / 3.6
@@ -321,7 +322,8 @@ A_M6 = 20.1
 print(f"cradle: two M6 8.8 bolts in shear at 25 g: {f_shock / (2 * A_M6):.0f} MPa (factor {0.6 * 800 / (f_shock / (2 * A_M6)):.0f} "
       f"on 480 MPa)")
 Zdt = math.pi * (44 ** 4 - 40 ** 4) / (32 * 44)
-print(f"down tube 44x2 under 25 g shock at 60 mm standoff: {f_shock * 60 / Zdt:.0f} MPa")
+stand = P["cradle_off"] + P["cradle_t"] + P["pack_d"] / 2
+print(f"down tube 44x2 under 25 g shock at {stand:.0f} mm standoff: {f_shock * stand / Zdt:.0f} MPa")
 print(f"pack current in use: {pp20 / V_NOM:.1f} A cruise, {i_max / V_MIN:.1f} A maximum; legacy limit 15 A; "
       f"pack heat at the maximum about {(i_max / V_MIN) ** 2 * 0.110:.1f} W (110 mOhm)")
 
@@ -335,13 +337,18 @@ for r in bom:
     if not r["Item"].startswith("11 "):
         tot += c
 print(f"BOM lines {len(bom)}, all priced: {all(r['unit_cost_usd'].strip() for r in bom)}")
-print(f"StepGen parts total (pack excluded) ${tot:.0f} against budget ${budget:.0f}: "
-      f"{'over' if tot > budget else 'under'} by ${abs(tot - budget):.0f} ({abs(tot - budget) / budget * 100:.0f} %)")
+print(f"StepGen parts total (pack excluded), all new: ${tot:.0f}")
+
+
 cost = {r["Item"].split()[0]: float(r["unit_cost_usd"]) for r in bom}
-salv = tot - (cost["2"] + cost["3"] - 40) - (cost["7"] + cost["9"] - 50)
-print(f"reference build, salvage route (walking-pad treadmill for items 2 and 3 at $40, donor 20 in bike for items 7 and 9 at $50): "
-      f"${salv:.0f} against budget ${budget:.0f}: {'over' if salv > budget else 'under'} by ${abs(salv - budget):.0f}")
-print(f"all-new-parts fallback ${tot:.0f} (reported, not held to the budget; SGN-DDR-002)")
+FORK_NEW = 40.0      # the donor bike's 20 in fork is too short for the head tube (SGN-DDR-003): fork and headset bought new
+salv = tot - (cost["2"] + cost["3"] - 40) - (cost["7"] + cost["9"] - 50) + FORK_NEW
+print(f"reference build, salvage route (walking-pad treadmill for items 2 and 3 at $40, donor 20 in bike for the front wheel and "
+      f"brakes at $50, fork and headset new at ${FORK_NEW:.0f}): ${salv:.0f}")
+print(f"value-engineering target ${budget:.0f} (a hypothetical control target, not a limit): estimated cost of the constructable "
+      f"design ${salv:.0f} on the reference build, ${abs(salv - budget):.0f} {'over' if salv > budget else 'under'} the target")
+print(f"all-new-parts fallback ${tot:.0f}, ${abs(tot - budget):.0f} {'over' if tot > budget else 'under'} the target "
+      f"(reported; SGN-DDR-002)")
 
 # ---------------------------------------------------------------- results
 hdr("Results by requirement")
@@ -356,17 +363,19 @@ res("R5", f"{table[20][3]:.0f} km at 20 km/h on the flat ({table[20][2]:.1f} Wh/
     "30 km at 20 km/h", "Met")
 res("R6", f"{p8:.0f} W at the wheel for 8 % at 8 km/h ({(P_RATED - p8) / P_RATED * 100:.0f} % margin)", "8 % at 8 km/h within 250 W",
     "At risk")
-res("R7", f"{v25 ** 2 / (2 * A_BR):.1f} m at 3 m/s2; rear brake alone {v25 ** 2 / (2 * a_rear):.1f} m; belt held by sprag with {T0:.0f} N tension",
+res("R7", f"{v25 ** 2 / (2 * A_BR):.1f} m at 3 m/s2; rear brake alone {v25 ** 2 / (2 * a_rear):.1f} m; belt held by the one-way bearing with {T0:.0f} N tension",
     "Two brakes; 10 m from 25 km/h; belt cannot run forward", "Met (on paper)")
-res("R8", f"Belt top {P['deck_z']:.0f} mm; side boards 6 mm proud of the belt, no rails", "250 mm or less; open sides", "Met")
+res("R8", f"Belt top {P['deck_z']:.0f} mm; side boards 9 mm proud of the belt, no rails", "250 mm or less; open sides", "Met")
 res("R9", "Guards modelled at both nips, rear tire and belt ends; gaps not yet checked against ISO 13857",
     "Nips, spokes and rear tire guarded", "Not verifiable at TRL 3")
 res("R10", f"{G['length'] / 1000:.2f} m long, {G['width'] / 1000:.2f} m wide, {veh_pack:.1f} kg with pack "
     f"({40 - veh_pack:.1f} kg margin, less than a 10 % growth allowance)", "2.4 m, 0.65 m, 40 kg", "At risk")
 res("R11", f"Interface v0.3: 10 kOhm coded INTERLOCK (node 0.30 V), vehicle heartbeat mode 2; {i_max / V_MIN:.1f} A maximum; below 60 V",
     "SwapCell v0.3 unchanged; 15 A or less; below 60 V DC", "Met (on paper)")
-res("R12", f"Reference (salvage) build ${salv:.0f} excluding the pack; all-new-parts fallback ${tot:.0f}",
-    f"${budget:.0f} excluding the pack on the reference build", "Not met" if salv > budget else "Met (on paper)")
+res("R12", f"Reference (salvage) build ${salv:.0f} excluding the pack, ${abs(salv - budget):.0f} {'over' if salv > budget else 'under'} "
+    f"the value-engineering target; all-new-parts fallback ${tot:.0f}",
+    f"${budget:.0f} value-engineering target excluding the pack on the reference build",
+    f"Over the target by ${salv - budget:.0f}" if salv > budget else "Under the target (on paper)")
 res("R13", f"Class V1 receiver specified: preload {1.2 * f_sine:.0f} N, lever ratio {1.2 * f_sine / 50:.1f}, bolts factor "
     f"{0.6 * 800 / (f_shock / (2 * A_M6)):.0f} at 25 g", "SwapCell latch class V1, no release or contact break",
     "Not verifiable at TRL 3")

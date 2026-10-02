@@ -1,5 +1,62 @@
 # Review note: StepGen
 
+## Session 2026-10-01: design made constructable and prototype build plan (kit 1.7.0)
+
+Under Amish's 2026-09-30 approval of the build plan format ("Extend this across all the other repos") and his instruction to make each design physically buildable while drawing it, this session brought StepGen to the approved standard. TRL stays at 3; nothing was built or tested.
+
+### What was done
+
+- Kit 1.7.0 installed (`.kit/`, `.claude/commands/`, root `CLAUDE.md`).
+- `cad/src/model.py` rebuilt from 29 components, each made or bought and fixed to its neighbours, with 72 build123d constructability checks (`python cad/src/model.py --check`): all pass. STEP and STL re-exported.
+- `docs/decisions/0003-design-for-construction.md` (SGN-DDR-003, draft): every change and its reason.
+- `docs/05-build-plan.md` (SGN-BLD-001 v0.1) from the kit template, with pictures for every component, joint and step.
+- `docs/06-design-decisions.md` (SGN-DEC-001 v0.1): open decisions, items to confirm when parts are bought, value engineering, decisions made.
+- `cad/src/build_plan_media.py`: overview, 14 making sketches (SGN-DWG-101 to 114), 12 joint close-ups, 19 step pictures (step 6 has two close-ups), a rail hole layout and a wiring diagram. Every picture was looked at and these fixed: the harness is drawn as one cable (its run inside the left rail included) in the overview and step 13; the Hall sensor and rear caliper, too small to show under a number badge, are drawn with the front roller and rear wheel in the overview (22 numbered components); the part being fitted in each step is always in colour; steps 6 and 12 are close-ups; joints 3, 5 and 8 recoloured and re-angled so each part reads; the roller cover sketch draws the two covers side by side so their profiles read. `python .kit/drawing.py --check-text` finds no overlaps.
+- `cad/src/sheets.py`: general arrangement SGN-DWG-001 to Rev P3. `cad/src/concept_media.py`: concept media regenerated.
+- `docs/04-calcs/sizing.py` and SGN-CAL-001 v0.3 re-run; SGN-PRC-001 and SGN-REQ-001 to v0.6; `bom/bom.csv` and `bom/bom-notes.md` restated and repriced; `project.yaml` (`design_state: constructable`, new evidence); README links line and "Building the prototype" section.
+
+### Design changes made for construction (SGN-DDR-003)
+
+1. Upper rear stays no longer pass through the rear roller and belt: two stays a side, from the rail end caps and the rear cross member to the dropouts.
+2. Brake rotors moved inside the dropouts and fork legs; rear caliper on a tab on the left dropout, front caliper on the fork's post mount.
+3. Dropouts as 6 mm plates 135 mm apart with slots open downward; torque arms added.
+4. Bought head tube machined for a ZS44 headset (50 x 3 mm) replaces the 44 x 3 mm tube; 26 in size fork (axle to crown about 410 mm) carries the 20 in wheel; headset modelled. Steering geometry unchanged.
+5. Down tube joins the head tube's side 100 mm above its bottom, so the fork turns 45 degrees each way clear of the frame.
+6. Nose tubes and block replaced by a 60 x 40 x 2 mm nose beam across the rail ends.
+7. Two cross members welded under the rails (were cut into them); ground clearance 145 mm (was 148 mm).
+8. End rollers on fixed axles bolted to the rails; rear axle in slots with M8 tension bolts; anti-reverse clutch is a one-way bearing inside the rear roller; belt drag is a felt-tipped screw through the right rail; magnet ring on the front roller end with the sensor inside the left rail. Lean clearance 32.6 degrees (was 30).
+9. Roller centres 3 mm lower so the belt wraps them (it overlapped); belt top still 240 mm.
+10. Idler carriers are 50 x 3 mm aluminium bars screwed inside the rails.
+11. Side boards on 13 mm spacers, 9 mm proud of the belt (was 6 mm and floating).
+12. Heel guard, roller covers and toe guard given flanges and tabs to the frame; bought fender riveted to the heel guard and stayed to the dropouts; front cover now covers the in-running nip under the front roller.
+13. Receiver cradle is a folded 3 mm channel on two welded tabs with an end stop plate and an over-centre lever beside the pack handle; pack 0.54 of the way up the down tube (was 0.55).
+14. Controller moved from under the down tube (in the front tire's path) to a plate on its left side.
+15. Welded steering column that clamps the steerer; straight 580 mm bar (width 0.58 m, was 0.61 m); controls each on their own clamp; display faces the rider.
+16. Kickstand on a welded plate; harness inside the left rail between grommets.
+17. Overall length 2.38 m with the fender (2.35 m over the tires).
+
+### Key results (SGN-CAL-001 v0.3)
+
+- Vehicle 35.1 kg without the pack, 37.9 kg with it (R10 margin 2.1 kg, at risk as before); 2.38 m long, 0.58 m wide.
+- Value-engineering target: USD 650. Estimated cost of the constructable design: USD 610 on the salvage reference build (USD 40 under the target; was USD 546). The donor bike's fork no longer fits the head tube, so the fork and headset are bought (about USD 40). All new: USD 750 (USD 100 over the target).
+- Requirement status unchanged: none not met; R1, R6, R10 at risk; R9 and R13 not verifiable at TRL 3; the rest met on paper.
+
+### Decisions proposed and awaiting Amish
+
+Listed in `docs/06-design-decisions.md`: acceptance of SGN-DDR-003 (P1 to P17), first user group, first target country, three render appearance items, and the three-wheel version (open until co-design). Eight items to confirm when parts are bought, including the 26 in fork with 30 mm offset.
+
+### Stale on Amish's Mac
+
+The design changed visibly, so `media/render-hero.png`, `media/render-exploded.png`, `media/render-detail.png`, `media/card.png`, `media/social-preview.png` and the appearance model `cad/src/product_model.py` are stale (they show the nose tubes, swept grips, outboard clutch housing and solid cradle). They were not regenerated here.
+
+### Safety
+
+Unchanged in substance. The build plan adds safety stops for welding, first standing on the belt, the pack and first power (SGN-BLD-001 section 6). The key switch still cuts the pack at once and is for use at a standstill only.
+
+### Recommended next step
+
+Amish reviews SGN-DDR-003 and the register. TRL 4 (building and testing to the plan) stays on hold under the portfolio cap.
+
 ## Session 2026-09-26: product appearance model and photoreal renders
 
 Amish chose this repo for the first batch of product renders on 2026-09-26. This session adds an appearance model for photoreal renders; the render images themselves (`media/render-hero.png`, `media/render-exploded.png` and a detail view) are produced later by the portfolio render run.
