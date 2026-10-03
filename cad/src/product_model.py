@@ -290,9 +290,7 @@ def product_parts(P=PARAMS, with_rider=True):
     wm = _text(Plane(origin=(RX1 - 250, yface, rz + 6), x_dir=(1, 0, 0), z_dir=(0, -1, 0)), "STEPGEN", 26, 0.6)
     if wm is not None:
         add("Wordmark decal", wm, C_WHITE, "paper", 1, "shell", E_FRAME)
-    tag = _text(Plane(origin=(RX0 + 150, yface, rz + 8), x_dir=(1, 0, 0), z_dir=(0, -1, 0)), "250 W  25 km/h", 13, 0.5)
-    if tag is not None:
-        add("Rating decal", tag, C_WHITE, "paper", 1, "shell", E_FRAME)
+    # no rating decal: the "250 W 25 km/h" rating stays off the renders until the legal category is confirmed (SGN-DEC-001, 2026-10-02)
 
     # kickstand, stowed along the left-hand (-Y) rail (BOM 16)
     k0, k1 = (RX0 + 160, -RY - 20, rz - 5), (RX0 - 60, -RY - 20, rz + 10)

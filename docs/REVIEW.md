@@ -342,3 +342,30 @@ Review this note and the media, and decide the proposed items above, especially 
 - Kit 1.5.0 synced: STANDARDS v1.5 (sections 12 to 15: product renders, storefront images and image quality, public release, authorship and signing), `.kit/cards.py`, `.kit/image_qc.py`, `.kit/release_gate.py`, issue templates, and the `/render-product` and `/release` commands. `CLAUDE.md` now matches `.kit/CLAUDE.md`.
 - Every `media/render-*.png` recaptioned from its original render with the new layout: the title, concept label and repository sit in a band above the render and the view note in a band below it, each line wrapped to the image width, so no text overlaps other text or the render or runs off the image. `media/card.png` and `media/social-preview.png` regenerated with the same rules.
 - `python .kit/image_qc.py` and `python .kit/release_gate.py` pass. trl stays 3.
+
+## Session 2026-10-02: approved follow-ups carried out
+
+Amish approved all follow-up actions from the open-decision sign-off on 2026-10-02. No CAD model, calculation result, drawing or build plan picture changed.
+
+### Approved follow-ups carried out
+
+1. Decision 5, BOM: done. `bom/bom-notes.md` records that the rotor carriers on the rear and front hubs (lines 6 and 7) are confirmed against the hubs bought when the wheel build is specified. No quantity or price changed.
+2. Decision 6, pictures: appearance model done. The "250 W 25 km/h" rating decal is removed from `cad/src/product_model.py`; render scenes exported to `/home/claude/renders/stepgen` for the views hero, exploded and detail (one .npz and .json each, plus `stepgen__jobs.json`). Not done here: the photoreal renders, `media/card.png` and `media/social-preview.png` are made on Amish's Mac next.
+3. Decision 3, calculations: not done, the RDW check has not happened (outreach by Amish). R3 and R4 stay as they are until it sets a lower speed cap or requires type approval.
+
+### Results
+
+- Requirement status changes: none.
+- Value-engineering target: USD 650. Estimated cost of the constructable design: USD 610 on the reference build (USD 40 under the target). `budget_usd` is unchanged. Mass is unchanged.
+
+### Documents changed
+
+No controlled document changed, so no version was bumped. Files changed: `cad/src/product_model.py`, `bom/bom-notes.md`.
+
+### Cross-repo actions
+
+None.
+
+## 2026-10-02: photoreal renders redone on the constructable design
+
+Rendered with Blender Cycles on Amish's Mac from the updated appearance model; captioned with `.kit/photo_caption.py`; `media/card.png` and `media/social-preview.png` regenerated with `.kit/cards.py`. Views: hero, exploded, detail. image_qc passes. Appearance deviations are those logged above as proposed, awaiting Amish.
